@@ -3,6 +3,6 @@
   "grade": "Grado",
   "last_name": "Apellidos",
   "name": "Nombre",
-  "professor": "Profesor",
+  "teacher": "Profesor",
   "school": "Escuela"
 }

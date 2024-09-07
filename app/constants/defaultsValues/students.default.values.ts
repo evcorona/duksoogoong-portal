@@ -1,24 +1,23 @@
-import { IStudent } from "@/types/Student";
-import dayjs from "dayjs";
+import { IStudent } from '@/types/Student'
 
 const DEFAULT_STUDENT_VALUES: IStudent = {
-  name: "",
-  lastName: "",
-  civilStatus: "single",
-  occupation: "",
-  dateBirth: null,
+  name: '',
+  lastName: '',
+  civilStatus: 'single',
+  occupation: '',
+  birthDate: null,
   timePracticing: 1,
-  periodTime: "months",
-  school: "",
+  periodTime: 'months',
+  school: '',
   currentGrade: {
     grade: null,
-    type: null,
+    level: null,
   },
   nextGrade: {
     grade: null,
-    type: null,
+    level: null,
   },
-  professor: "",
-};
+  teacher: '',
+}
 
-export default DEFAULT_STUDENT_VALUES;
+export default DEFAULT_STUDENT_VALUES
