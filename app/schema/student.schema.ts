@@ -1,14 +1,14 @@
-import dayjs from 'dayjs'
-import { z } from 'zod'
+import dayjs from "dayjs";
+import { z } from "zod";
 
 const stringSchema = z
   .string({
-    required_error: 'Campo requerido',
-    invalid_type_error: 'Campo requerido',
+    required_error: "Campo requerido",
+    invalid_type_error: "Campo requerido",
   })
-  .min(1, { message: 'Campo requerido' })
+  .min(1, { message: "Campo requerido" })
   .trim()
-  .toLowerCase()
+  .toLowerCase();
 
 export default z
   .object({
@@ -18,16 +18,16 @@ export default z
     occupation: stringSchema,
     birthDate: z
       .date({
-        required_error: 'Campo requerido',
-        invalid_type_error: 'Campo requerido',
+        required_error: "Campo requerido",
+        invalid_type_error: "Campo requerido",
       })
-      .transform((value) => dayjs(value).format('YYYY-MM-DD')),
+      .transform((value) => dayjs(value).format("YYYY-MM-DD")),
     timePracticing: z
       .number({
-        required_error: 'Campo requerido',
-        invalid_type_error: 'Campo requerido',
+        required_error: "Campo requerido",
+        invalid_type_error: "Campo requerido",
       })
-      .min(1, { message: 'Debe ser mayor a 1' }),
+      .min(1, { message: "Debe ser mayor a 1" }),
     periodTime: stringSchema,
     school: stringSchema,
     teacher: stringSchema,
@@ -42,4 +42,4 @@ export default z
       })
       .required(),
   })
-  .required()
+  .required();
