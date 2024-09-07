@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import {
   TableContainer,
   Table,
@@ -29,14 +31,14 @@ export default function CustomTable(props: CustomTableProps) {
     if (isEmpty(data) || !!selectRowProps?.setSelectedRow) return;
     if (!selectRowProps?.skipFirstSelection)
       selectRowProps?.setSelectedRow(data[0]);
-  }, [props.data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.data, props.checkboxFeature, props.selectRowProps]);
 
-  if (props.rowComponentProps || props.menuProps) {
+  if (props.rowComponentProps || props.menuProps)
     allHeaders.push({
       accessor: "",
       label: " ",
     });
-  }
 
   return (
     <Card

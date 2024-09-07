@@ -1,4 +1,3 @@
-import { IStudent } from "@/types/Student";
 import { HeaderType } from "constants/headers/headers.types";
 import { CIVIL_STATUSES, TIME_PERIODS } from "../business";
 

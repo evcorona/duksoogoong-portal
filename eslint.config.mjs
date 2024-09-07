@@ -14,6 +14,7 @@ export default [
   { extends: ["eslint:recommended", "next", "prettier"] },
   {
     rules: {
+      "@typescript-eslint/no-explicit-any": "off",
       "sort-imports": [
         "error",
         {

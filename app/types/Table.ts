@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import { CheckboxFeature } from "./CheckboxFeature";
 import { HeaderType } from "@/constants/headers/headers.types";
 import { ReactElement } from "react";
