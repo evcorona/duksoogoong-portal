@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #191b19;
+  --foreground: #faf9f5;
+  --font-poppins: "Arima", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #191b19;
+    --foreground: #faf9f5;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-poppins);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

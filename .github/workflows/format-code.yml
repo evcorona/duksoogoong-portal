@@ -1,0 +1,32 @@
+name: Code Format and Lint Check
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  check-code:
+    name: Code Format and Lint Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm and install deps
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.7.*
+          run_install: true
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.*
+          cache: pnpm
+
+      - name: Check Lint
+        run: pnpm run lint
+
+      - name: Check code formatting
+        run: pnpm run format:check
