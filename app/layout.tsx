@@ -1,5 +1,10 @@
 import "./styles/globals.css";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import App from "./_app";
+import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -20,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={poppins.className}>
-        <main>{children}</main>
+        <App>{children}</App>
       </body>
     </html>
   );

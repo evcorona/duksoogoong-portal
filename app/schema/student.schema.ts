@@ -1,55 +1,41 @@
+import * as yup from "yup";
+
 import dayjs from "dayjs";
-import { z } from "zod";
 
-const stringSchema = z
-  .string({
-    required_error: "Campo requerido",
-    invalid_type_error: "Campo requerido",
-  })
-  .min(1, { message: "Campo requerido" })
+const stringSchema = yup
+  .string()
   .trim()
-  .toLowerCase();
+  .lowercase()
+  .required("Campo requerido");
 
-export default z
-  .object({
-    name: stringSchema,
-    lastName: stringSchema,
-    civilStatus: stringSchema,
-    occupation: stringSchema,
-    birthDate: z
-      .date({
-        required_error: "Campo requerido",
-        invalid_type_error: "Campo requerido",
-      })
-      .transform((value) => dayjs(value).format("YYYY-MM-DD")),
-    timePracticing: z
-      .number({
-        required_error: "Campo requerido",
-        invalid_type_error: "Campo requerido",
-      })
-      .min(1, { message: "Debe ser mayor a 1" }),
-    periodTime: stringSchema,
-    school: stringSchema,
-    teacher: stringSchema,
-    currentGrade: z.object({
-      grade: z
-        .number({
-          required_error: "Campo requerido",
-          invalid_type_error: "Campo requerido",
-        })
-        .min(0),
-      level: stringSchema,
-    }),
-    nextGrade: z
-      .object({
-        grade: z
-          .number({
-            required_error: "Campo requerido",
-            invalid_type_error: "Campo requerido",
-          })
-          .min(0),
-        level: stringSchema,
-      })
-      .required(),
-  })
-  .required();
+const numberSchema = yup
+  .number()
+  .transform((value) => (value ? Number(value) : null))
+  .required("Campo requerido");
+
+export default yup.object().shape({
+  name: stringSchema,
+  lastName: stringSchema,
+  civilStatus: stringSchema.nullable(),
+  occupation: stringSchema,
+  birthDate: yup
+    .string()
+    .transform((value) => value && dayjs(value).format("YYYY/MM/DD"))
+    .required("Campo requerido"),
+  timePracticing: numberSchema.min(1, { message: "Debe ser mayor a 1" }),
+  periodTime: yup.string().required("Campo requerido"),
+  school: stringSchema,
+  teacher: stringSchema,
+  grade: numberSchema
+    .min(0, "Valor inválido")
+    .nullable()
+    .required("Campo requerido"),
+  level: yup.string().nullable().required("Campo requerido"),
+  nextGrade: yup.object({
+    grade: numberSchema
+      .min(0, "Valor inválido")
+      .nullable()
+      .required("Campo requerido"),
+    level: yup.string().nullable().required("Campo requerido"),
+  }),
+});

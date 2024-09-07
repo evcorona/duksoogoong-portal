@@ -15,28 +15,45 @@ import FormContainer from "@/components/form/FormContainer";
 import { IStudent } from "@/types/Student";
 import Image from "next/image";
 import RHFAutocomplete from "@/components/form/RHFAutocomplete";
-import RHFDatePicker from "@/components/form/RHFDatePicker";
 import RHFTextField from "@/components/form/RHFTextField";
+import { createStudents } from "@/services/students";
 import dayjs from "dayjs";
 import { isNumber } from "lodash";
 import schema from "schema/student.schema";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function StudentForm() {
-  const methods = useForm<IStudent>({
+  const methods = useForm<any>({
     mode: "onTouched",
     defaultValues: DEFAULT_STUDENT_VALUES,
-    resolver: zodResolver(schema),
+    resolver: yupResolver(schema),
   });
 
-  const { watch, setValue, resetField } = methods;
+  const {
+    watch,
+    setValue,
+    resetField,
+    reset,
+    formState: { isLoading, isSubmitting, isValidating },
+  } = methods;
+
+  const mutation = useMutation({
+    mutationFn: createStudents,
+    onSuccess: () => {
+      alert(`Student creado`);
+      reset();
+    },
+  });
+
+  const createStudent = (formValues: IStudent) => mutation.mutate(formValues);
 
   const birthDate = watch("birthDate");
   const age = dayjs().diff(birthDate, "year");
-  const currentGrade = watch("currentGrade.grade");
-  const currentGradeType = watch("currentGrade.level");
+  const currentGrade = watch("grade");
+  const currentGradeType = watch("level");
   const nextGrade = watch("nextGrade");
 
   const gradesOptions = currentGradeType
@@ -52,7 +69,7 @@ export default function StudentForm() {
       ? `Eiby ${nextGrade.level}`
       : `${nextGrade.grade}° ${nextGrade.level}`;
 
-  console.log(currentGrade);
+  const disableForms = isLoading || isSubmitting || isValidating;
 
   useEffect(() => {
     if (currentGrade === null || !currentGradeType) return;
@@ -73,7 +90,7 @@ export default function StudentForm() {
         level: "kup",
       };
     if (currentGradeType === "kup" && currentGrade === 0) {
-      resetField("currentGrade.grade");
+      resetField("grade");
       resetField("nextGrade");
     }
     if (currentGradeType === "kup" && currentGrade === 1)
@@ -95,18 +112,36 @@ export default function StudentForm() {
       </Typography>
       <FormContainer
         methods={methods}
-        submitAction={() => false}
+        submitAction={createStudent}
         buttonLabel={"Guardar"}
+        isLoading={isLoading}
+        disabled={disableForms}
       >
-        <RHFTextField name="name" label="Nombre" type="text" />
-        <RHFTextField name="lastName" label="Apellidos" type="text" />
+        <RHFTextField
+          name="name"
+          label="Nombre"
+          type="text"
+          disabled={disableForms}
+        />
+        <RHFTextField
+          name="lastName"
+          label="Apellidos"
+          type="text"
+          disabled={disableForms}
+        />
         <RHFAutocomplete
           name="civilStatus"
           label="Estado civil"
           options={CIVIL_STATUSES}
+          disabled={disableForms}
           disableClearable
         />
-        <RHFTextField name="occupation" label="Ocupación" type="text" />
+        <RHFTextField
+          name="occupation"
+          label="Ocupación"
+          type="text"
+          disabled={disableForms}
+        />
         <CustomGridContainer
           itemSize={[{ xs: 9 }, { xs: 3 }]}
           columnSpacing={{ xs: 2 }}
@@ -116,10 +151,11 @@ export default function StudentForm() {
             justifyContent: "center",
           }}
         >
-          <RHFDatePicker
+          <RHFTextField
             name="birthDate"
             label="Fecha de nacimiento"
-            maxDate={dayjs()}
+            type="date"
+            disabled={disableForms}
           />
           {ageLabel && (
             <Typography fontStyle={"italic"} fontSize={"small"}>
@@ -140,33 +176,47 @@ export default function StudentForm() {
             name="timePracticing"
             label="Tiempo de práctica"
             type="number"
+            disabled={disableForms}
           />
           <RHFAutocomplete
+            disabled={disableForms}
             disableClearable
             name="periodTime"
             label="Periodo de tiempo"
             options={TIME_PERIODS}
           />
         </CustomGridContainer>
-        <RHFTextField name="school" label="Escuela" type="text" />
-        <RHFTextField name="teacher" label="Profesor" type="text" />
+        <RHFTextField
+          name="school"
+          label="Escuela"
+          type="text"
+          disabled={disableForms}
+        />
+        <RHFTextField
+          name="teacher"
+          label="Profesor"
+          type="text"
+          disabled={disableForms}
+        />
         <CustomGridContainer
           itemSize={{ xs: 6 }}
           columnSpacing={{ xs: 2 }}
           rowSpacing={{ xs: 2 }}
         >
           <RHFAutocomplete
-            name="currentGrade.level"
+            name="level"
             label="Nivel actual"
             options={TYPE_GRADES}
             disableClearable
+            disabled={disableForms}
           />
           <RHFAutocomplete
             disableClearable
-            name="currentGrade.grade"
+            name="grade"
             label="Grado actual"
             noOptionsText="Seleccionar nivel actual"
             options={gradesOptions}
+            disabled={disableForms}
           />
           {displayNextGrade && (
             <Typography

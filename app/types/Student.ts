@@ -1,20 +1,19 @@
-import { Dayjs } from "dayjs";
-
 export interface IStudent {
   name: string;
   lastName: string;
-  civilStatus: string;
+  civilStatus: string | null;
   occupation: string;
-  birthDate: Dayjs | null;
-  timePracticing: number;
-  periodTime: "months" | "years";
+  birthDate: string;
+  timePracticing: number | null;
+  periodTime: string | null;
   school: string;
   teacher: string;
-  currentGrade: IGrade;
+  grade: number | null;
+  level: string | null;
   nextGrade: IGrade;
 }
 
 interface IGrade {
   grade: number | null;
-  level: "dan" | "kup" | "poom" | null;
+  level: string | null;
 }

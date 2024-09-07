@@ -5,14 +5,12 @@ const DEFAULT_STUDENT_VALUES: IStudent = {
   lastName: "",
   civilStatus: "single",
   occupation: "",
-  birthDate: null,
+  birthDate: "",
   timePracticing: 1,
   periodTime: "months",
   school: "",
-  currentGrade: {
-    grade: null,
-    level: null,
-  },
+  grade: null,
+  level: null,
   nextGrade: {
     grade: null,
     level: null,
