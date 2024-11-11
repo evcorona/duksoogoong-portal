@@ -1,43 +1,43 @@
-import { HeaderType } from 'src/constants/headers/headers.types'
+import { HeaderType } from "src/constants/headers/headers.types";
 
 export const SCHOOLS_HEADERS: HeaderType[] = [
   {
-    accessor: 'name',
-    label: 'Nombre',
-    align: 'left',
-    customRow: (value) => ({ value, styles: { textTransform: 'capitalize' } }),
+    accessor: "name",
+    label: "Nombre",
+    align: "left",
+    customRow: (value) => ({ value, styles: { textTransform: "capitalize" } }),
   },
   {
-    accessor: 'address',
-    label: 'Domicilio',
-    align: 'left',
+    accessor: "address",
+    label: "Domicilio",
+    align: "left",
     customRow: (value) => ({
       value: value?.address,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: "capitalize" },
     }),
   },
   {
-    accessor: 'address',
-    label: 'Estado',
-    align: 'left',
+    accessor: "address",
+    label: "Estado",
+    align: "left",
     customRow: (value) => ({
       value: value?.state,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: "capitalize" },
     }),
   },
   {
-    accessor: 'address',
-    label: 'Ciudad',
-    align: 'left',
+    accessor: "address",
+    label: "Ciudad",
+    align: "left",
     customRow: (value) => ({
       value: value?.city,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: "capitalize" },
     }),
   },
   {
-    accessor: 'address',
-    label: 'Código postal',
-    align: 'left',
+    accessor: "address",
+    label: "Código postal",
+    align: "left",
     customRow: (value) => ({ value: value?.zipCode }),
   },
-]
+];
