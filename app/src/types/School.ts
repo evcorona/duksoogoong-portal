@@ -1,8 +1,8 @@
-import { IAddress } from '@/types/Address'
+import { IAddress } from "@/types/Address";
 
 export interface ISchool {
-  _id?: string
-  name: string
-  address: IAddress
-  isActive: boolean
+  _id?: string;
+  name: string;
+  address: IAddress;
+  isActive: boolean;
 }

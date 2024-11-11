@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 
-import { DeleteOutline, EditOutlined, MoreVert } from '@mui/icons-material'
+import { DeleteOutline, EditOutlined, MoreVert } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -11,66 +11,66 @@ import {
   MenuList,
   Paper,
   Popover,
-} from '@mui/material'
-import CustomDialog from 'src/components/CustomDialog'
-import { useTranslation } from 'next-i18next'
-import { useState, MouseEvent } from 'react'
-import { TableMenuProps } from '@/src/types/Table'
+} from "@mui/material";
+import CustomDialog from "src/components/CustomDialog";
+import { useTranslation } from "next-i18next";
+import { useState, MouseEvent } from "react";
+import { TableMenuProps } from "@/src/types/Table";
 
 interface Props extends TableMenuProps {
-  data: any
+  data: any;
 }
 
 export default function TableMenu(props: Props) {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const [openDialog, setOpenDialog] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) =>
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.currentTarget);
 
-  const handleClose = () => setAnchorEl(null)
+  const handleClose = () => setAnchorEl(null);
 
-  const open = Boolean(anchorEl)
-  const id = open ? 'menu-popover' : undefined
+  const open = Boolean(anchorEl);
+  const id = open ? "menu-popover" : undefined;
 
   const menuItems = [
     {
       icon: <EditOutlined />,
-      label: 'edit',
+      label: "edit",
       action: props.editAction,
     },
     {
       icon: <DeleteOutline />,
-      label: 'delete',
+      label: "delete",
       requireConfirmation: true,
       action: props.deleteAction,
-      color: 'red',
+      color: "red",
     },
-  ]
+  ];
 
-  if (props.extraButton) menuItems.splice(1, 0, props.extraButton)
+  if (props.extraButton) menuItems.splice(1, 0, props.extraButton);
 
   return (
     <>
       <Button
         onClick={handleClick}
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
         }}
       >
         <MoreVert />
       </Button>
       <Popover
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
       >
-        <Paper sx={{ width: 'fit-content' }}>
+        <Paper sx={{ width: "fit-content" }}>
           <MenuList dense>
             {menuItems.map((item, index) => (
               <Box key={index}>
@@ -79,10 +79,10 @@ export default function TableMenu(props: Props) {
                     color: item.color,
                   }}
                   onClick={() => {
-                    if (item.requireConfirmation) setOpenDialog(true)
+                    if (item.requireConfirmation) setOpenDialog(true);
                     else {
-                      item.action(props.data)
-                      handleClose()
+                      item.action(props.data);
+                      handleClose();
                     }
                   }}
                 >
@@ -92,15 +92,15 @@ export default function TableMenu(props: Props) {
                 <CustomDialog
                   open={openDialog}
                   setOpen={setOpenDialog}
-                  item={props.name ?? ''}
-                  itemName={`${props.data?.name ?? ''} ${
-                    props.data?.last_name ?? ''
+                  item={props.name ?? ""}
+                  itemName={`${props.data?.name ?? ""} ${
+                    props.data?.last_name ?? ""
                   }`}
                   isLoading={false}
-                  type='delete'
+                  type="delete"
                   onClick={() => {
-                    item.action(props.data)
-                    handleClose()
+                    item.action(props.data);
+                    handleClose();
                   }}
                 />
               </Box>
@@ -109,5 +109,5 @@ export default function TableMenu(props: Props) {
         </Paper>
       </Popover>
     </>
-  )
+  );
 }

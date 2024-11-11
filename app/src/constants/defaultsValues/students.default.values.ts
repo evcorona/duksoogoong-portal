@@ -1,21 +1,21 @@
-import { IStudent } from '@/types/Student'
+import { IStudent } from "@/types/Student";
 
 const DEFAULT_STUDENT_VALUES: IStudent = {
-  name: '',
-  lastName: '',
-  civilStatus: 'single',
-  occupation: '',
-  birthDate: '',
+  name: "",
+  lastName: "",
+  civilStatus: "single",
+  occupation: "",
+  birthDate: "",
   timePracticing: 1,
-  periodTime: 'months',
-  school: '',
+  periodTime: "months",
+  school: "",
   grade: null,
   level: null,
   nextGrade: {
     grade: null,
     level: null,
   },
-  teacher: '',
-}
+  teacher: "",
+};
 
-export default DEFAULT_STUDENT_VALUES
+export default DEFAULT_STUDENT_VALUES;

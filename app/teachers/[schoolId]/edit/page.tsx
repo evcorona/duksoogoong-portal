@@ -1,14 +1,14 @@
-'use client'
+"use client";
 
-import TitleBar from '@/components/TitleBar'
-import SchoolForm from '@/schools/sections/SchoolForm'
-import { Container } from '@mui/material'
+import TitleBar from "@/components/TitleBar";
+import SchoolForm from "@/schools/sections/SchoolForm";
+import { Container } from "@mui/material";
 
 export default function EditSchool() {
   return (
-    <Container maxWidth='xl' sx={{ paddingY: { xs: 2, sm: 4 } }}>
-      <TitleBar title='Editar escuela' />
+    <Container maxWidth="xl" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+      <TitleBar title="Editar escuela" />
       <SchoolForm />
     </Container>
-  )
+  );
 }

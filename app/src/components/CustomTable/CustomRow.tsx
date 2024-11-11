@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 
-import { Check, Close } from '@mui/icons-material'
+import { Check, Close } from "@mui/icons-material";
 import {
   Checkbox,
   Chip,
@@ -10,50 +10,50 @@ import {
   TableRow,
   Tooltip,
   Typography,
-} from '@mui/material'
-import { isArray, isBoolean } from 'lodash'
+} from "@mui/material";
+import { isArray, isBoolean } from "lodash";
 
-import { CustomRowProps } from '@/src/types/Table'
-import SvgIconStyle from 'src/components/SvgIconStyle'
-import TableMenu from 'src/components/CustomTable/TableMenu'
+import { CustomRowProps } from "@/src/types/Table";
+import SvgIconStyle from "src/components/SvgIconStyle";
+import TableMenu from "src/components/CustomTable/TableMenu";
 
-import { useTranslation } from 'next-i18next'
+import { useTranslation } from "next-i18next";
 
 export default function CustomRow(props: CustomRowProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
-  const { selectedRow, setSelectedRow } = props?.selectRowProps || {}
+  const { selectedRow, setSelectedRow } = props?.selectRowProps || {};
 
-  const isSelected = selectedRow && selectedRow.id === props.data.id
+  const isSelected = selectedRow && selectedRow.id === props.data.id;
   const isChecked = props.rowsChecked?.includes(
-    props.data[props.idAccessor ?? 'id']
-  )
+    props.data[props.idAccessor ?? "id"],
+  );
 
-  const onClickRow = () => setSelectedRow && setSelectedRow(props.data)
+  const onClickRow = () => setSelectedRow && setSelectedRow(props.data);
   const onCheckRow = (event: any) =>
     props.setRowsChecked &&
-    props.setRowsChecked(props.data, event.target.checked)
+    props.setRowsChecked(props.data, event.target.checked);
 
   return (
     <TableRow
       hover={true}
       selected={isSelected}
       sx={{
-        cursor: setSelectedRow ? 'pointer' : 'default',
+        cursor: setSelectedRow ? "pointer" : "default",
         ...props.customStyle,
       }}
     >
       {props.setRowsChecked && (
         <TableCell
-          align='center'
+          align="center"
           onClick={onClickRow}
           sx={{
-            borderBottom: '1px solid #EAEEF4',
+            borderBottom: "1px solid #EAEEF4",
           }}
         >
           <Checkbox
             checked={!!isChecked}
-            sx={{ color: '#A4A4A4' }}
+            sx={{ color: "#A4A4A4" }}
             onChange={onCheckRow}
           />
         </TableCell>
@@ -62,49 +62,49 @@ export default function CustomRow(props: CustomRowProps) {
       {props.customChildren && props.customChildren}
       {!props.customChildren &&
         props.headers.map((header, i) => {
-          const displayIndex = header.accessor === 'index'
-          const value = props.data[header.accessor]
+          const displayIndex = header.accessor === "index";
+          const value = props.data[header.accessor];
           const customRow =
-            header.customRow && header.customRow(value, props.data)
+            header.customRow && header.customRow(value, props.data);
           const content = displayIndex
             ? props.index + 1
-            : (customRow?.value ?? value)
-          const icon = customRow?.icon
+            : (customRow?.value ?? value);
+          const icon = customRow?.icon;
 
-          const translationOptions = customRow?.translationOptions
+          const translationOptions = customRow?.translationOptions;
           const contentLocalized = header.translate
             ? t(content, translationOptions)
-            : content
+            : content;
 
-          const isTotalsRow = props.hasTotals && i === props.headers.length - 1
-          const contentIsBoolean = isBoolean(content)
-          const contentIsArray = isArray(content)
+          const isTotalsRow = props.hasTotals && i === props.headers.length - 1;
+          const contentIsBoolean = isBoolean(content);
+          const contentIsArray = isArray(content);
 
           const booleanValue = () =>
             content ? (
-              <Check sx={{ color: '#A4A4A4', ...customRow?.styles }} />
+              <Check sx={{ color: "#A4A4A4", ...customRow?.styles }} />
             ) : (
-              <Close sx={{ color: '#A4A4A4', ...customRow?.styles }} />
-            )
+              <Close sx={{ color: "#A4A4A4", ...customRow?.styles }} />
+            );
 
-          const contentIsText = !contentIsBoolean && !contentIsArray
+          const contentIsText = !contentIsBoolean && !contentIsArray;
 
-          const onClick = customRow?.onClick ?? onClickRow
+          const onClick = customRow?.onClick ?? onClickRow;
 
-          const isCursorPointer = customRow?.redirectTo || customRow?.onClick
+          const isCursorPointer = customRow?.redirectTo || customRow?.onClick;
 
           return (
             <TableCell
               key={`tableCell-${i}`}
-              padding='normal'
-              align={header.align ?? 'left'}
+              padding="normal"
+              align={header.align ?? "left"}
               sx={{
-                borderBottom: '1px solid #EAEEF4',
-                color: value ? 'text' : 'GrayText',
-                cursor: isCursorPointer ? 'pointer' : 'default',
-                ':hover': {
-                  textDecoration: isCursorPointer ? 'underline' : 'none',
-                  textUnderlineOffset: '4px',
+                borderBottom: "1px solid #EAEEF4",
+                color: value ? "text" : "GrayText",
+                cursor: isCursorPointer ? "pointer" : "default",
+                ":hover": {
+                  textDecoration: isCursorPointer ? "underline" : "none",
+                  textUnderlineOffset: "4px",
                 },
               }}
               onClick={onClick}
@@ -112,12 +112,12 @@ export default function CustomRow(props: CustomRowProps) {
               {contentIsArray && (
                 <Stack
                   gap={1}
-                  direction='row'
-                  flexWrap='wrap'
+                  direction="row"
+                  flexWrap="wrap"
                   sx={{ ...customRow?.styles }}
                 >
                   {icon && (
-                    <Tooltip title='Routes Number' placement='top-start'>
+                    <Tooltip title="Routes Number" placement="top-start">
                       <SvgIconStyle
                         src={`/assets/icons/${icon}.svg`}
                         sx={{ width: 20, height: 20 }}
@@ -144,17 +144,17 @@ export default function CustomRow(props: CustomRowProps) {
                       sx={{ width: 20, height: 20, marginRight: 1 }}
                     />
                   )}
-                  {contentLocalized ?? (isTotalsRow && t('undefined'))}
+                  {contentLocalized ?? (isTotalsRow && t("undefined"))}
                 </Typography>
               )}
             </TableCell>
-          )
+          );
         })}
       {props.menuProps && (
         <TableCell
-          align='center'
+          align="center"
           sx={{
-            borderBottom: '1px solid #EAEEF4',
+            borderBottom: "1px solid #EAEEF4",
           }}
         >
           <TableMenu {...props.menuProps} name={props.name} data={props.data} />
@@ -162,9 +162,9 @@ export default function CustomRow(props: CustomRowProps) {
       )}
       {props.rowComponentProps && (
         <TableCell
-          align='center'
+          align="center"
           sx={{
-            borderBottom: '1px solid #EAEEF4',
+            borderBottom: "1px solid #EAEEF4",
           }}
         >
           <props.rowComponentProps.component
@@ -177,5 +177,5 @@ export default function CustomRow(props: CustomRowProps) {
         </TableCell>
       )}
     </TableRow>
-  )
+  );
 }
