@@ -1,9 +1,9 @@
 "use client";
 
-import CustomTable from "@/components/CustomTable/CustomTable";
-import TitleBar from "@/components/TitleBar";
+import CustomTable from "@/src/components/CustomTable/CustomTable";
+import TitleBar from "@/src/components/TitleBar";
 import { SCHOOLS_HEADERS } from "@/schools/constants/schools.headers";
-import { getSchools, deleteSchool } from "@/services/schools";
+import { getSchools, deleteSchool } from "@/src/services/schools";
 import { Add } from "@mui/icons-material";
 import { Container } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";

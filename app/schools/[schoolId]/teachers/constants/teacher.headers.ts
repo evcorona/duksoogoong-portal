@@ -1,6 +1,6 @@
 import { HeaderType } from 'src/constants/headers/headers.types'
 
-export const SCHOOLS_HEADERS: HeaderType[] = [
+export const TEACHER_HEADERS: HeaderType[] = [
   {
     accessor: 'name',
     label: 'Nombre',
