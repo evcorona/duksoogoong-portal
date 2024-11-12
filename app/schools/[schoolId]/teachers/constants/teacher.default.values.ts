@@ -1,10 +1,14 @@
-import ADDRESS_DEFAULT_VALUES from "@/src/constants/defaultsValues/address.default.values";
-import { ISchool } from "@/src/types/School";
+import { ITeacher } from '@/src/types/Teacher'
 
-const DEFAULT_TEACHER_VALUES: ISchool = {
-  name: "",
-  address: ADDRESS_DEFAULT_VALUES,
-  isActive: true,
-};
+const DEFAULT_TEACHER_VALUES: ITeacher = {
+  name: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  isAdmin: false,
+  grade: 1,
+  userId: '',
+  schoolId: '',
+}
 
-export default DEFAULT_TEACHER_VALUES;
+export default DEFAULT_TEACHER_VALUES
