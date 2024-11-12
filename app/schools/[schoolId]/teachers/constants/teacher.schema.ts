@@ -1,11 +1,15 @@
-import * as yup from 'yup'
+import * as yup from "yup";
 
-const stringSchema = yup.string().trim().lowercase().required('Campo requerido')
+const stringSchema = yup
+  .string()
+  .trim()
+  .lowercase()
+  .required("Campo requerido");
 
 const numberSchema = yup
   .number()
   .transform((value) => (value ? Number(value) : null))
-  .required('Campo requerido')
+  .required("Campo requerido");
 
 export default yup.object().shape({
   name: stringSchema,
@@ -14,4 +18,4 @@ export default yup.object().shape({
   phone: stringSchema,
   isAdmin: yup.boolean().default(false),
   grade: numberSchema.min(1).max(10),
-})
+});
