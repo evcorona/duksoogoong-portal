@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { Container } from '@mui/material'
+import { Container } from "@mui/material";
 
 export default function Home() {
   return (
     <Container
-      maxWidth='sm'
+      maxWidth="sm"
       sx={{
         paddingY: { xs: 2, sm: 4 },
       }}
     >
       Login
     </Container>
-  )
+  );
 }
