@@ -72,7 +72,7 @@ export default function SchoolForm() {
       disabled={disableForms}
     >
       <RHFTextField name="name" label="Nombre de la escuela" capitalize />
-      <TitleBar title="Ubicación" isSectionTitle />
+      <TitleBar title="Domicilio" isSectionTitle />
       <RHFAddressForm />
     </FormContainer>
   );

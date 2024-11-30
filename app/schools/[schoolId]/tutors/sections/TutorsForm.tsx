@@ -103,7 +103,7 @@ export default function TutorForm() {
         label="Email de acceso"
         disabled={data || disableForms}
       />
-      <TitleBar title="Ubicación" isSectionTitle />
+      <TitleBar title="Domicilio" isSectionTitle />
       <RHFAddressForm />
     </FormContainer>
   );

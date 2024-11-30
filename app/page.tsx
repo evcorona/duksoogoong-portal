@@ -1,16 +1,35 @@
 "use client";
 
-import { Container } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <Container
-      maxWidth="sm"
+    <Box
       sx={{
-        paddingY: { xs: 2, sm: 4 },
+        backgroundImage: "url(/images/background2.jpg)",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
       }}
     >
-      Login
-    </Container>
+      <Stack justifyContent={"center"} alignItems={"center"} height={"90vh"}>
+        <Box
+          sx={{
+            width: "50%",
+            height: "50%",
+            position: "relative",
+          }}
+        >
+          <Image
+            src={"/logo.png"}
+            alt={"Logo"}
+            layout="fill"
+            objectFit="contain"
+          />
+        </Box>
+      </Stack>
+    </Box>
   );
 }

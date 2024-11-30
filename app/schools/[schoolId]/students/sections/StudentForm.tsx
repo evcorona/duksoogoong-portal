@@ -9,7 +9,7 @@ import {
   TYPE_GRADES,
 } from "@/src/constants/business";
 import { Stack, Typography } from "@mui/material";
-import CustomGridContainer from "@/src/components/form/CustomGridContainer";
+import CustomGridContainer from "@/src/components/CustomGridContainer";
 import FormContainer from "@/src/components/form/FormContainer";
 import { IStudent } from "@/src/types/Student";
 import Image from "next/image";

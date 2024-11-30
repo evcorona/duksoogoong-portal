@@ -16,7 +16,7 @@ export default function Students() {
     enabled: !!schoolId,
   });
   return (
-    <Container maxWidth="xl" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
       <TitleBar title="Estudiantes" />
       <StudentTable data={data} isLoading={isLoading} />
     </Container>

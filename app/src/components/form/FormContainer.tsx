@@ -49,10 +49,8 @@ export default function FormContainer(props: Props) {
       >
         <Card
           sx={{
-            backgroundColor: "#FAF9F6",
             padding: { xs: 2, sm: 4 },
             paddingY: { xs: 4 },
-            borderRadius: "18px",
             display: "flex",
             flexDirection: "column",
             gap: 1,

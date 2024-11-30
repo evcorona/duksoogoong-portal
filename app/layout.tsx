@@ -1,13 +1,9 @@
-import "./src/styles/globals.css";
+import "@/src/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import App from "./_app";
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({
-  weight: ["300", "600"],
-  subsets: ["latin"],
-});
+import App from "_app";
+import NavBar from "NavBar";
+import { Box } from "@mui/material";
 
 export const metadata = {
   title: "DukSooGoong Portal",
@@ -21,7 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={poppins.className}>
+      <body>
+        {/* <NavBar /> */}
         <App>{children}</App>
       </body>
     </html>

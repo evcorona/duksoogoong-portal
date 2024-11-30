@@ -27,7 +27,7 @@ export default function Teachers() {
   });
 
   return (
-    <Container maxWidth="xl" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
       <TitleBar
         title="Profesores"
         buttonProps={{

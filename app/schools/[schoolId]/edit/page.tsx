@@ -6,7 +6,7 @@ import { Container } from "@mui/material";
 
 export default function EditSchool() {
   return (
-    <Container maxWidth="xl" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
       <TitleBar title="Editar escuela" />
       <SchoolForm />
     </Container>
