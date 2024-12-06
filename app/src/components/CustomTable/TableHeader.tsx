@@ -4,14 +4,16 @@
 
 import { Checkbox, TableCell, TableHead, TableRow } from "@mui/material";
 
-import { HeaderType } from "constants/headers/headers.types";
+import { ITableData } from "@/src/types/table/TableData";
 import { useTranslation } from "next-i18next";
+import { Edit, Menu } from "@mui/icons-material";
 
 type Props = {
   size?: "small" | "medium";
-  headers: HeaderType[];
+  headers: ITableData[];
   isAllChecked?: boolean;
   handleAllChecked?: (isChecked: boolean) => void;
+  isMenuHeader?: boolean;
 };
 
 export default function TableHeader(props: Props) {
@@ -71,6 +73,18 @@ export default function TableHeader(props: Props) {
             {t(header.label ?? "")}
           </TableCell>
         ))}
+        {props.isMenuHeader && (
+          <TableCell
+            align="center"
+            sx={{
+              borderBottom: "1px solid #EAEEF4",
+              backgroundColor: "#F4F4F4",
+              borderBottomLeftRadius: "0px",
+            }}
+          >
+            <Edit />
+          </TableCell>
+        )}
       </TableRow>
     </TableHead>
   );

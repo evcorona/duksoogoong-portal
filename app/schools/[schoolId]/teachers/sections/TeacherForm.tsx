@@ -66,7 +66,7 @@ export default function TeacherForm() {
   const { mutate: createTeacherSubmit } = useMutation({
     mutationFn: createTeacher,
     onSuccess: () => {
-      if (pathname.includes("join")) push("/login");
+      if (pathname.includes("registro")) push("/login");
       else back();
     },
   });

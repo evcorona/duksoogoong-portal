@@ -63,10 +63,4 @@ export const TUTORS_HEADERS: ITableData[] = [
     align: "left",
     customRow: (value) => ({ value: value?.email }),
   },
-  {
-    accessor: "students",
-    label: "Estudiantes",
-    align: "left",
-    customRow: (value) => ({ value: value?.length }),
-  },
 ];

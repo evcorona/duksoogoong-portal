@@ -8,7 +8,7 @@ import {
   TIME_PERIODS,
   TYPE_GRADES,
 } from "@/src/constants/business";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import CustomGridContainer from "@/src/components/CustomGridContainer";
 import FormContainer from "@/src/components/form/FormContainer";
 import { IStudent } from "@/src/types/Student";
@@ -90,7 +90,8 @@ export default function StudentForm2() {
   const mutation = useMutation({
     mutationFn: createStudents,
     onSuccess: () => {
-      if (pathname.includes("join")) push(`${pathname.replace("student", "")}`);
+      if (pathname.includes("registro"))
+        push(`${pathname.replace("student", "")}`);
       else back();
     },
   });
@@ -159,18 +160,19 @@ export default function StudentForm2() {
 
   return (
     <Stack direction={"column"} gap={4}>
-      {/* <Stack justifyContent={'center'} alignItems={'center'}>
-        <Image src={'/logo.png'} alt={'Logo'} width={130} height={130} />
-      </Stack>
-      <Typography align='center' variant='h4'>
-        Registro de alumnos
-      </Typography> */}
       <FormContainer
         methods={methods}
         submitAction={createStudent}
         buttonLabel={"Guardar"}
         isLoading={isLoading}
         disabled={disableForms}
+        extraFooterComponents={
+          <>
+            <Button variant="outlined" onClick={back}>
+              Cancelar
+            </Button>
+          </>
+        }
       >
         <RHFTextField
           name="name"

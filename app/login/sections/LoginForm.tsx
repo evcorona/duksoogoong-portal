@@ -2,44 +2,21 @@ import FormContainer from "@/src/components/form/FormContainer";
 import RHFTextField from "@/src/components/form/RHFTextField";
 import TitleBar from "@/src/components/TitleBar";
 import { Box, Link, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
-import schema from "@/login/constants/login.schema";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { login } from "@/src/services/auth";
-import { useMutation } from "@tanstack/react-query";
-import { ICredentials } from "@/src/types/Users";
-import { useContext } from "react";
-import { AuthContext } from "@/src/contexts/auth";
+import useLogin from "@/src/hooks/useLogin";
 
 export default function LoginForm() {
-  const { redirectionAfterLogin } = useContext(AuthContext);
+  const { isLoading, methods, loginSubmit } = useLogin();
 
-  const { mutate: loginSubmit } = useMutation({
-    mutationFn: login,
-    onSuccess: () => redirectionAfterLogin(),
-  });
-
-  const methods = useForm<any>({
-    mode: "onTouched",
-    defaultValues: { email: "", password: "" },
-    resolver: yupResolver(schema),
-  });
-
-  const {
-    handleSubmit,
-    formState: { isSubmitting, isLoading, isValidating },
-  } = methods;
-
-  const submitAction = (formValues: ICredentials) => loginSubmit(formValues);
+  const { handleSubmit } = methods;
 
   return (
     <Box sx={{ width: "100%" }}>
       <FormContainer
         methods={methods}
-        submitAction={handleSubmit(submitAction)}
+        submitAction={handleSubmit(loginSubmit)}
         buttonLabel={"Entrar"}
-        isLoading={isSubmitting || isLoading}
-        disabled={isValidating || isSubmitting}
+        isLoading={isLoading}
+        disabled={isLoading}
         buttonFullWidth
       >
         <TitleBar title="Iniciar sesión" isSectionTitle />

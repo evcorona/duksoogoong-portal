@@ -34,7 +34,7 @@ export default function CustomTable(props: CustomTableProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.data, props.checkboxFeature, props.selectRowProps]);
 
-  if (props.rowComponentProps || props.menuProps)
+  if (props.rowComponentProps)
     allHeaders.push({
       accessor: "",
       label: " ",
@@ -61,6 +61,7 @@ export default function CustomTable(props: CustomTableProps) {
           <TableHeader
             headers={allHeaders}
             size={props.size}
+            isMenuHeader={!!props.menuProps}
             {...props.checkboxFeature}
           />
           <TableBody>
