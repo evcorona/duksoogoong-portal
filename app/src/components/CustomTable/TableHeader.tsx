@@ -26,31 +26,20 @@ export default function TableHeader(props: Props) {
   return (
     <TableHead
       sx={{
-        backgroundColor: "#F4F4F4",
-        borderBottom: "1px solid #EAEEF4",
-        borderRadius: "0px",
-        color: "#000",
-        fontWeight: "bold",
-        borderBottomLeftRadius: "0px",
+        ".MuiTableCell-root": {
+          color: "text.primary",
+          backgroundColor: "#786F52",
+          border: "none",
+        },
       }}
     >
       <TableRow
         sx={{
-          backgroundColor: "#F4F4F4",
-          borderBottom: "1px solid #EAEEF4",
-          borderRadius: "0px",
-          borderBottomLeftRadius: "0px",
+          fontWeight: "bold",
         }}
       >
         {props.handleAllChecked && (
-          <TableCell
-            align="center"
-            sx={{
-              borderBottom: "1px solid #EAEEF4",
-              backgroundColor: "#F4F4F4",
-              borderBottomLeftRadius: "0px",
-            }}
-          >
+          <TableCell align="center">
             <Checkbox
               checked={!!props.isAllChecked}
               sx={{ color: "#A4A4A4" }}
@@ -63,11 +52,8 @@ export default function TableHeader(props: Props) {
             key={`tableHeader-${i}`}
             align={header.align ?? "left"}
             sx={{
-              backgroundColor: "#F4F4F4",
               fontSize: props.size,
-              borderBottom: "1px solid #EAEEF4",
-              color: "#000",
-              borderBottomLeftRadius: "0px",
+              fontWeight: "bold",
             }}
           >
             {t(header.label ?? "")}
@@ -77,12 +63,11 @@ export default function TableHeader(props: Props) {
           <TableCell
             align="center"
             sx={{
-              borderBottom: "1px solid #EAEEF4",
-              backgroundColor: "#F4F4F4",
-              borderBottomLeftRadius: "0px",
+              width: "50px",
+              fontWeight: "bold",
             }}
           >
-            <Edit />
+            <Edit fontSize="small" />
           </TableCell>
         )}
       </TableRow>

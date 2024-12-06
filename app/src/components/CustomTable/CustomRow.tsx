@@ -39,8 +39,12 @@ export default function CustomRow(props: CustomRowProps) {
       hover={true}
       selected={isSelected}
       sx={{
-        cursor: setSelectedRow ? "pointer" : "default",
+        cursor: props?.selectRowProps ? "pointer" : "default",
         ...props.customStyle,
+
+        ".MuiTableCell-root": {
+          cursor: props?.selectRowProps ? "pointer" : "default",
+        },
       }}
     >
       {props.setRowsChecked && (
@@ -155,6 +159,7 @@ export default function CustomRow(props: CustomRowProps) {
           align="center"
           sx={{
             borderBottom: "1px solid #EAEEF4",
+            width: "50px",
           }}
         >
           <TableMenu {...props.menuProps} name={props.name} data={props.data} />

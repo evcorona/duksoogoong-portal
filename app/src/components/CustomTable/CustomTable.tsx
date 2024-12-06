@@ -46,7 +46,6 @@ export default function CustomTable(props: CustomTableProps) {
         width: "100%",
         overflow: "auto",
         backgroundColor: "#F4F4F4",
-        borderRadius: "16px",
         ...props.sx,
       }}
     >

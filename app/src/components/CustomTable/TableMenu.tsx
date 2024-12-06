@@ -7,10 +7,9 @@ import {
   Button,
   ListItemIcon,
   ListItemText,
+  Menu,
   MenuItem,
   MenuList,
-  Paper,
-  Popover,
 } from "@mui/material";
 import CustomDialog from "src/components/CustomDialog";
 import { useTranslation } from "next-i18next";
@@ -38,12 +37,12 @@ export default function TableMenu(props: Props) {
   const menuItems = [
     {
       icon: <EditOutlined />,
-      label: "edit",
+      label: "Editar",
       action: props.editAction,
     },
     {
       icon: <DeleteOutline />,
-      label: "delete",
+      label: "Remover",
       requireConfirmation: true,
       action: props.deleteAction,
       color: "red",
@@ -62,7 +61,7 @@ export default function TableMenu(props: Props) {
       >
         <MoreVert />
       </Button>
-      <Popover
+      <Menu
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
         id={id}
@@ -70,44 +69,40 @@ export default function TableMenu(props: Props) {
         anchorEl={anchorEl}
         onClose={handleClose}
       >
-        <Paper sx={{ width: "fit-content" }}>
-          <MenuList dense>
-            {menuItems.map((item, index) => (
-              <Box key={index}>
-                <MenuItem
-                  sx={{
-                    color: item.color,
-                  }}
-                  onClick={() => {
-                    if (item.requireConfirmation) setOpenDialog(true);
-                    else {
-                      item.action(props.data);
-                      handleClose();
-                    }
-                  }}
-                >
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText>{t(item.label)}</ListItemText>
-                </MenuItem>
-                <CustomDialog
-                  open={openDialog}
-                  setOpen={setOpenDialog}
-                  item={props.name ?? ""}
-                  itemName={`${props.data?.name ?? ""} ${
-                    props.data?.last_name ?? ""
-                  }`}
-                  isLoading={false}
-                  type="delete"
-                  onClick={() => {
+        <MenuList dense>
+          {menuItems.map((item, index) => (
+            <Box key={index}>
+              <MenuItem
+                sx={{ color: item.color }}
+                onClick={() => {
+                  if (item.requireConfirmation) setOpenDialog(true);
+                  else {
                     item.action(props.data);
                     handleClose();
-                  }}
-                />
-              </Box>
-            ))}
-          </MenuList>
-        </Paper>
-      </Popover>
+                  }
+                }}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText>{t(item.label)}</ListItemText>
+              </MenuItem>
+              <CustomDialog
+                open={openDialog}
+                setOpen={setOpenDialog}
+                item={props.name ?? ""}
+                itemName={`${props.data?.name ?? ""} ${
+                  props.data?.last_name ?? ""
+                }`}
+                isLoading={false}
+                type="delete"
+                onClick={() => {
+                  item.action(props.data);
+                  handleClose();
+                }}
+              />
+            </Box>
+          ))}
+        </MenuList>
+      </Menu>
     </>
   );
 }

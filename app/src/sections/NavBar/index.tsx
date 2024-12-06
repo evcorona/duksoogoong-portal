@@ -64,10 +64,12 @@ export default function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
+            onClick={() => push("/")}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "flex" },
               flexGrow: 1,
+              cursor: "pointer",
             }}
           >
             <Image src={"/logo.png"} alt={"Logo"} width={50} height={50} />
@@ -83,7 +85,7 @@ export default function NavBar() {
             {!isLogged && (
               <Button
                 onClick={() => push("/login")}
-                sx={{ color: "white", display: "block" }}
+                sx={{ color: "text.primary", display: "block" }}
               >
                 Iniciar sesión
               </Button>
@@ -123,7 +125,9 @@ export default function NavBar() {
                     handleCloseUserMenu();
                   }}
                 >
-                  <setting.icon sx={{ color: "white", marginRight: 1 }} />
+                  <setting.icon
+                    sx={{ color: "text.primary", marginRight: 1 }}
+                  />
                   <Typography sx={{ textAlign: "center", fontSize: "small" }}>
                     {setting?.label}
                   </Typography>

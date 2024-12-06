@@ -13,11 +13,14 @@ export default function Home() {
   useEffect(() => {
     const { role, userId, schoolId } = authData.user;
 
+    if (!role) push("/login");
     if (role === "schoolAdmin") push(`/schools/${schoolId}`);
     if (role === "teacher") push(`/schools/${schoolId}/teachers/${userId}`);
     if (role === "tutor") push(`/tutors/${userId}`);
     if (role === "admin") push("/schools");
     if (role === "main") push("/schools");
+
+    return;
   }, [authData]);
 
   return null;
