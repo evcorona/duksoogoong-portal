@@ -1,5 +1,4 @@
 import { ITableData } from '@/src/types/table/TableData'
-import { CIVIL_STATUSES } from '@/src/constants/business'
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 dayjs.extend(duration)

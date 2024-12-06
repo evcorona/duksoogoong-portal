@@ -14,11 +14,7 @@ import FormContainer from '@/src/components/form/FormContainer'
 import { IStudent } from '@/src/types/Student'
 import RHFAutocomplete from '@/src/components/form/RHFAutocomplete'
 import RHFTextField from '@/src/components/form/RHFTextField'
-import {
-  createStudents,
-  editStudent,
-  getStudentById,
-} from '@/src/services/students'
+import { editStudent, getStudentById } from '@/src/services/students'
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash'
 import { useEffect } from 'react'
