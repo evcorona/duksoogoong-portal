@@ -1,37 +1,37 @@
-"use client";
+'use client'
 
-import CustomTable from "@/src/components/CustomTable/CustomTable";
-import TitleBar from "@/src/components/TitleBar";
-import { TEACHERS_HEADERS } from "@/schools/[schoolId]/teachers/constants/teacher.headers";
-import { getTeachersBySchoolId, deleteTeacher } from "@/src/services/teachers";
-import { Add } from "@mui/icons-material";
-import Page from "@/src/components/Page";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter, usePathname, useParams } from "next/navigation";
-import SeeDetailButton from "@/src/components/CustomTable/SeeDetailButton";
+import CustomTable from '@/src/components/CustomTable/CustomTable'
+import TitleBar from '@/src/components/TitleBar'
+import { TEACHERS_HEADERS } from '@/schools/[schoolId]/teachers/constants/teacher.headers'
+import { deleteTeacher, getTeachersBySchoolId } from '@/src/services/teachers'
+import { Add } from '@mui/icons-material'
+import Page from '@/src/components/Page'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
 
 export default function Teachers() {
-  const { push } = useRouter();
-  const pathname = usePathname();
-  const { schoolId } = useParams<{ schoolId: string }>();
+  const { push } = useRouter()
+  const pathname = usePathname()
+  const { schoolId } = useParams<{ schoolId: string }>()
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["schoolTeachers", schoolId],
+    queryKey: ['schoolTeachers', schoolId],
     queryFn: () => getTeachersBySchoolId(schoolId as string),
     enabled: !!schoolId,
-  });
+  })
 
   const { mutateAsync: deleteMutation } = useMutation({
     mutationFn: deleteTeacher,
     onSuccess: () => refetch(),
-  });
+  })
 
   return (
     <Page>
       <TitleBar
         title="Profesores"
         buttonProps={{
-          label: "crear profesor",
+          label: 'crear profesor',
           icon: <Add />,
           onClick: () => push(`${pathname}/create`),
         }}
@@ -56,5 +56,5 @@ export default function Teachers() {
         }}
       />
     </Page>
-  );
+  )
 }

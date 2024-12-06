@@ -1,21 +1,21 @@
-import { useFormContext, Controller } from "react-hook-form";
-import { Switch, FormControlLabel, FormControlLabelProps } from "@mui/material";
-import { useTranslation } from "next-i18next";
+import { Controller, useFormContext } from 'react-hook-form'
+import { FormControlLabel, FormControlLabelProps, Switch } from '@mui/material'
+import { useTranslation } from 'next-i18next'
 
-type IProps = Omit<FormControlLabelProps, "control">;
+type IProps = Omit<FormControlLabelProps, 'control'>
 
 interface Props extends IProps {
-  name: string;
-  label: string;
-  labelOptions?: object;
-  disabled?: boolean;
-  labelPlacement?: "end" | "start" | "top" | "bottom";
+  name: string
+  label: string
+  labelOptions?: object
+  disabled?: boolean
+  labelPlacement?: 'end' | 'start' | 'top' | 'bottom'
   switchColor?: {
-    status: boolean;
-    checked: string;
-    unchecked: string;
-  };
-  size?: "small" | "medium";
+    status: boolean
+    checked: string
+    unchecked: string
+  }
+  size?: 'small' | 'medium'
 }
 
 const coloringSwitch = (
@@ -24,21 +24,21 @@ const coloringSwitch = (
   colorUnchecked: string,
 ) => ({
   color: checked ? colorChecked : colorUnchecked,
-  "& .MuiSwitch-switchBase.Mui-checked": {
+  '& .MuiSwitch-switchBase.Mui-checked': {
     color: colorChecked,
   },
-  "& .MuiSwitch-switchBase": {
+  '& .MuiSwitch-switchBase': {
     color: colorUnchecked,
   },
-  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
     backgroundColor: colorChecked,
     opacity: 0.3,
   },
-  "& .MuiSwitch-switchBase + .MuiSwitch-track": {
+  '& .MuiSwitch-switchBase + .MuiSwitch-track': {
     backgroundColor: colorUnchecked,
     opacity: 0.3,
   },
-});
+})
 
 export default function RHFSwitch({
   name,
@@ -48,8 +48,8 @@ export default function RHFSwitch({
   switchColor,
   ...other
 }: Props) {
-  const { control } = useFormContext();
-  const { t } = useTranslation();
+  const { control } = useFormContext()
+  const { t } = useTranslation()
 
   const switchColorStyles =
     switchColor &&
@@ -57,18 +57,18 @@ export default function RHFSwitch({
       switchColor.status,
       switchColor.checked,
       switchColor.unchecked,
-    );
+    )
 
   return (
     <FormControlLabel
       {...other}
       label={t(label, { ...other.labelOptions })}
-      labelPlacement={labelPlacement || "end"}
+      labelPlacement={labelPlacement || 'end'}
       sx={{
         marginLeft: 0,
-        ".MuiFormControlLabel-label": {
-          fontSize: other.size === "small" ? "12px" : "14px",
-          textAlign: "left",
+        '.MuiFormControlLabel-label': {
+          fontSize: other.size === 'small' ? '12px' : '14px',
+          textAlign: 'left',
         },
         ...other.sx,
         ...switchColorStyles,
@@ -88,5 +88,5 @@ export default function RHFSwitch({
         />
       }
     />
-  );
+  )
 }

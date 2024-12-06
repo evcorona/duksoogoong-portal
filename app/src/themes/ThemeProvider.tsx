@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react'
 
 import {
-  createTheme,
-  ThemeOptions,
   ThemeProvider as MUIThemeProvider,
-} from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import { Noto_Sans } from "next/font/google";
+  ThemeOptions,
+  createTheme,
+} from '@mui/material/styles'
+import { CssBaseline } from '@mui/material'
+import { Noto_Sans } from 'next/font/google'
 
 const comicNeue = Noto_Sans({
-  weight: ["300", "400"],
-  subsets: ["latin"],
-});
+  weight: ['300', '400'],
+  subsets: ['latin'],
+})
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export default function ThemeProvider({ children }: Props) {
-  const black = "#1e1e1e";
-  const white = "#fdf9f9";
-  const brown = "#786F52";
-  const red = "#ED6A5A";
-  const yellow = "#E1BC29";
+  const black = '#1e1e1e'
+  const white = '#fdf9f9'
+  const brown = '#786F52'
+  // const red = "#ED6A5A";
+  const yellow = '#E1BC29'
 
   const theme: ThemeOptions = createTheme({
     palette: {
@@ -66,7 +66,7 @@ export default function ThemeProvider({ children }: Props) {
           root: {
             backgroundColor: white,
             color: black,
-            "& .MuiTypography-root": {
+            '& .MuiTypography-root': {
               color: black,
             },
           },
@@ -76,19 +76,19 @@ export default function ThemeProvider({ children }: Props) {
         styleOverrides: {
           root: {
             color: yellow,
-            textDecoration: "none",
-            fontWeight: "bold",
+            textDecoration: 'none',
+            fontWeight: 'bold',
           },
         },
       },
       MuiButton: {
         styleOverrides: {
           root: {
-            fontWeight: "bold",
-            boxShadow: "none",
+            fontWeight: 'bold',
+            boxShadow: 'none',
             variants: [
               {
-                props: { variant: "contained", color: "primary" },
+                props: { variant: 'contained', color: 'primary' },
                 style: {
                   backgroundColor: yellow,
                 },
@@ -98,12 +98,12 @@ export default function ThemeProvider({ children }: Props) {
         },
       },
     },
-  });
+  })
 
   return (
     <MUIThemeProvider theme={theme}>
       <CssBaseline />
       {children}
     </MUIThemeProvider>
-  );
+  )
 }

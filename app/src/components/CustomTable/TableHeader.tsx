@@ -1,48 +1,48 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-"use client";
+'use client'
 
-import { Checkbox, TableCell, TableHead, TableRow } from "@mui/material";
+import { Checkbox, TableCell, TableHead, TableRow } from '@mui/material'
 
-import { ITableData } from "@/src/types/table/TableData";
-import { useTranslation } from "next-i18next";
-import { Edit, Menu } from "@mui/icons-material";
+import { ITableData } from '@/src/types/table/TableData'
+import { useTranslation } from 'next-i18next'
+import { Edit } from '@mui/icons-material'
 
 type Props = {
-  size?: "small" | "medium";
-  headers: ITableData[];
-  isAllChecked?: boolean;
-  handleAllChecked?: (isChecked: boolean) => void;
-  isMenuHeader?: boolean;
-};
+  size?: 'small' | 'medium'
+  headers: ITableData[]
+  isAllChecked?: boolean
+  handleAllChecked?: (isChecked: boolean) => void
+  isMenuHeader?: boolean
+}
 
 export default function TableHeader(props: Props) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   function onChange(event: any) {
-    props.handleAllChecked && props.handleAllChecked(event.target.checked);
+    props.handleAllChecked && props.handleAllChecked(event.target.checked)
   }
 
   return (
     <TableHead
       sx={{
-        ".MuiTableCell-root": {
-          color: "text.primary",
-          backgroundColor: "#786F52",
-          border: "none",
+        '.MuiTableCell-root': {
+          color: 'text.primary',
+          backgroundColor: '#786F52',
+          border: 'none',
         },
       }}
     >
       <TableRow
         sx={{
-          fontWeight: "bold",
+          fontWeight: 'bold',
         }}
       >
         {props.handleAllChecked && (
           <TableCell align="center">
             <Checkbox
               checked={!!props.isAllChecked}
-              sx={{ color: "#A4A4A4" }}
+              sx={{ color: '#A4A4A4' }}
               onChange={onChange}
             />
           </TableCell>
@@ -50,21 +50,21 @@ export default function TableHeader(props: Props) {
         {props.headers.map((header, i) => (
           <TableCell
             key={`tableHeader-${i}`}
-            align={header.align ?? "left"}
+            align={header.align ?? 'left'}
             sx={{
               fontSize: props.size,
-              fontWeight: "bold",
+              fontWeight: 'bold',
             }}
           >
-            {t(header.label ?? "")}
+            {t(header.label ?? '')}
           </TableCell>
         ))}
         {props.isMenuHeader && (
           <TableCell
             align="center"
             sx={{
-              width: "50px",
-              fontWeight: "bold",
+              width: '50px',
+              fontWeight: 'bold',
             }}
           >
             <Edit fontSize="small" />
@@ -72,5 +72,5 @@ export default function TableHeader(props: Props) {
         )}
       </TableRow>
     </TableHead>
-  );
+  )
 }

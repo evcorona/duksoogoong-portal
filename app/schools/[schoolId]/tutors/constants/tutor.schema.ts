@@ -1,6 +1,6 @@
-import * as yup from "yup";
+import * as yup from 'yup'
 
-const stringSchema = yup.string().trim().required("Campo requerido");
+const stringSchema = yup.string().trim().required('Campo requerido')
 
 export default yup.object().shape({
   name: stringSchema.lowercase(),
@@ -16,4 +16,4 @@ export default yup.object().shape({
   isActive: yup.boolean().default(true),
   students: yup.array().of(yup.string()),
   userId: yup.string(),
-});
+})

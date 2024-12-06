@@ -1,42 +1,42 @@
-"use client";
+'use client'
 
-import CustomTable from "@/src/components/CustomTable/CustomTable";
-import TitleBar from "@/src/components/TitleBar";
-import { SCHOOLS_HEADERS } from "@/schools/constants/schools.headers";
-import { getSchools, deleteSchool } from "@/src/services/schools";
-import { Add } from "@mui/icons-material";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { ISchool } from "@/src/types/School";
-import Page from "@/src/components/Page";
+import CustomTable from '@/src/components/CustomTable/CustomTable'
+import TitleBar from '@/src/components/TitleBar'
+import { SCHOOLS_HEADERS } from '@/schools/constants/schools.headers'
+import { deleteSchool, getSchools } from '@/src/services/schools'
+import { Add } from '@mui/icons-material'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { ISchool } from '@/src/types/School'
+import Page from '@/src/components/Page'
 
 export default function Schools() {
-  const [selectedRow, setSelectedRow] = useState<ISchool | null>(null);
+  const [selectedRow, setSelectedRow] = useState<ISchool | null>(null)
 
-  const { push } = useRouter();
-  const pathname = usePathname();
+  const { push } = useRouter()
+  const pathname = usePathname()
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["allSchools"],
+    queryKey: ['allSchools'],
     queryFn: getSchools,
-  });
+  })
 
   const { mutateAsync: deleteMutation } = useMutation({
     mutationFn: deleteSchool,
     onSuccess: () => refetch(),
-  });
+  })
 
   useEffect(() => {
-    selectedRow && push(`${pathname}/${selectedRow?._id}`);
-  }, [selectedRow]);
+    selectedRow && push(`${pathname}/${selectedRow?._id}`)
+  }, [selectedRow])
 
   return (
     <Page>
       <TitleBar
         title="Escuelas"
         buttonProps={{
-          label: "crear escuela",
+          label: 'crear escuela',
           icon: <Add />,
           onClick: () => push(`${pathname}/create`),
         }}
@@ -59,5 +59,5 @@ export default function Schools() {
         }}
       />
     </Page>
-  );
+  )
 }

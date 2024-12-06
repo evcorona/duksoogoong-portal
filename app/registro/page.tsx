@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { Stack, Typography } from "@mui/material";
-import Image from "next/image";
-import Signup from "@/login/sections/Signup";
-import Page from "@/src/components/Page";
+import { Stack, Typography } from '@mui/material'
+import Image from 'next/image'
+import Signup from '@/login/sections/Signup'
+import Page from '@/src/components/Page'
 
 export default function Login() {
   return (
@@ -15,7 +15,12 @@ export default function Login() {
         alignItems="center"
         gap={4}
       >
-        <Image src={"/logo.png"} alt={"Logo"} width={130} height={130} />
+        <Image
+          src={'/logo.png'}
+          alt={'Logo'}
+          width={130}
+          height={130}
+        />
         <Stack
           direction="column"
           width="100vw"
@@ -23,12 +28,15 @@ export default function Login() {
           alignItems="center"
           gap={2}
         >
-          <Typography variant="h5" textAlign={"center"}>
+          <Typography
+            variant="h5"
+            textAlign={'center'}
+          >
             Plataforma de DukSooGoong
           </Typography>
           <Signup />
         </Stack>
       </Stack>
     </Page>
-  );
+  )
 }

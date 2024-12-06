@@ -1,22 +1,22 @@
-import { Grid2 as Grid, SxProps } from "@mui/material";
+import { Grid2 as Grid, SxProps } from '@mui/material'
 
-import { ReactNode } from "react";
-import { isArray } from "lodash";
+import { ReactNode } from 'react'
+import { isArray } from 'lodash'
 
 type ResponsiveValues = {
-  xs?: number;
-  sm?: number;
-  md?: number;
-  lg?: number;
-};
+  xs?: number
+  sm?: number
+  md?: number
+  lg?: number
+}
 
 type Props = {
-  children: ReactNode[];
-  itemSize?: ResponsiveValues | ResponsiveValues[];
-  columnSpacing?: ResponsiveValues;
-  rowSpacing?: ResponsiveValues;
-  sx?: SxProps;
-};
+  children: ReactNode[]
+  itemSize?: ResponsiveValues | ResponsiveValues[]
+  columnSpacing?: ResponsiveValues
+  rowSpacing?: ResponsiveValues
+  sx?: SxProps
+}
 
 export default function CustomGridContainer(props: Props) {
   return (
@@ -29,14 +29,17 @@ export default function CustomGridContainer(props: Props) {
       {props.children.map((component, index) => {
         const itemSize = isArray(props.itemSize)
           ? props.itemSize[index]
-          : props.itemSize;
+          : props.itemSize
 
         return (
-          <Grid key={index} size={itemSize}>
+          <Grid
+            key={index}
+            size={itemSize}
+          >
             {component}
           </Grid>
-        );
+        )
       })}
     </Grid>
-  );
+  )
 }
