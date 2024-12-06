@@ -38,10 +38,6 @@ export default function ThemeProvider({ children }: Props) {
       secondary: {
         main: brown,
       },
-      text: {
-        primary: white,
-        secondary: black,
-      },
     },
     typography: {
       fontFamily: `${comicNeue.style.fontFamily}, Arial, sans-serif`,

@@ -6,9 +6,9 @@ import { getTutorById } from '@/src/services/tutors'
 import Page from '@/src/components/Page'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { TUTORS_HEADERS } from '@/schools/[schoolId]/tutors/constants/tutor.headers'
 import { deleteStudent, getStudentsByTutorId } from '@/src/services/students'
 import StudentTable from '@/schools/[schoolId]/students/sections/StudentTable'
+import { TUTORS_DETAILS_HEADERS } from '../constants/tutor.details.headers'
 
 export default function TutorStudents() {
   const { tutorId } = useParams<{
@@ -42,7 +42,7 @@ export default function TutorStudents() {
       <CustomCard
         title="Detalles"
         data={[data]}
-        headers={TUTORS_HEADERS}
+        headers={TUTORS_DETAILS_HEADERS}
         isLoading={isLoading}
       />
       <TitleBar

@@ -25,42 +25,11 @@ export const TUTORS_HEADERS: ITableData[] = [
     }),
   },
   {
-    accessor: 'address',
-    label: 'Domicilio',
+    accessor: 'studentsCount',
+    label: 'Estudiantes registrados',
     align: 'left',
     customRow: (value) => ({
-      value: value?.address,
-      styles: { textTransform: 'capitalize' },
+      value: `${value} estudiante${value > 1 ? 's' : ''}`,
     }),
-  },
-  {
-    accessor: 'address',
-    label: 'Estado',
-    align: 'left',
-    customRow: (value) => ({
-      value: value?.state,
-      styles: { textTransform: 'capitalize' },
-    }),
-  },
-  {
-    accessor: 'address',
-    label: 'Ciudad',
-    align: 'left',
-    customRow: (value) => ({
-      value: value?.city,
-      styles: { textTransform: 'capitalize' },
-    }),
-  },
-  {
-    accessor: 'address',
-    label: 'Código postal',
-    align: 'left',
-    customRow: (value) => ({ value: value?.zipCode }),
-  },
-  {
-    accessor: 'userId',
-    label: 'Email',
-    align: 'left',
-    customRow: (value) => ({ value: value?.email }),
   },
 ]

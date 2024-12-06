@@ -27,7 +27,7 @@ export default function TableHeader(props: Props) {
     <TableHead
       sx={{
         '.MuiTableCell-root': {
-          color: 'text.primary',
+          color: 'white',
           backgroundColor: '#786F52',
           border: 'none',
         },

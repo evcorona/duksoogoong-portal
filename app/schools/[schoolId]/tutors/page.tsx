@@ -8,9 +8,12 @@ import { Add } from '@mui/icons-material'
 import Page from '@/src/components/Page'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
+import { useEffect, useState } from 'react'
+import { ITutor } from '@/src/types/Tutor'
 
 export default function Tutors() {
+  const [selectedRow, setSelectedRow] = useState<ITutor | null>(null)
+
   const { push } = useRouter()
   const pathname = usePathname()
   const { schoolId } = useParams<{ schoolId: string }>()
@@ -25,6 +28,10 @@ export default function Tutors() {
     mutationFn: deleteTutor,
     onSuccess: () => refetch(),
   })
+
+  useEffect(() => {
+    selectedRow && push(`${pathname}/${selectedRow?._id}`)
+  }, [selectedRow])
 
   return (
     <Page>
@@ -46,14 +53,12 @@ export default function Tutors() {
           editAction: (data) => push(`${pathname}/${data?._id}/edit`),
           deleteAction: (data) => deleteMutation(data?._id),
         }}
-        sx={{ marginTop: 2, paddingBottom: 2 }}
-        rowComponentProps={{
-          actions: {
-            href: (row: any) => `${pathname}/${row?._id}`,
-            openInNewTab: true,
-          },
-          component: SeeDetailButton,
+        selectRowProps={{
+          skipFirstSelection: true,
+          selectedRow,
+          setSelectedRow,
         }}
+        sx={{ marginTop: 2, paddingBottom: 2 }}
       />
     </Page>
   )

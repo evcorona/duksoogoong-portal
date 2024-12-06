@@ -1,4 +1,5 @@
 import { IAddress } from './Address'
+import { ISchool } from './School'
 import { ITeacher } from './Teacher'
 
 export interface IStudent {
@@ -13,7 +14,7 @@ export interface IStudent {
   name: string
   occupation: string
   priorExperienceDays: number
-  schoolId: string
+  schoolId: string | ISchool
   teacherId: string | ITeacher
   ruf?: string
   userId?: string

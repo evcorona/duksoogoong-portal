@@ -14,7 +14,11 @@ import FormContainer from '@/src/components/form/FormContainer'
 import { IStudent } from '@/src/types/Student'
 import RHFAutocomplete from '@/src/components/form/RHFAutocomplete'
 import RHFTextField from '@/src/components/form/RHFTextField'
-import { createStudents } from '@/src/services/students'
+import {
+  createStudents,
+  editStudent,
+  getStudentById,
+} from '@/src/services/students'
 import dayjs from 'dayjs'
 import { isNumber } from 'lodash'
 import { useEffect } from 'react'
@@ -29,10 +33,9 @@ import { getSchools } from '@/src/services/schools'
 import { getTeachersBySchoolId } from '@/src/services/teachers'
 import { ITeacher } from '@/src/types/Teacher'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { getTutorById } from '@/src/services/tutors'
 
-export default function StudentForm() {
-  const { tutorId } = useParams<{ tutorId: string }>()
+export default function StudentFormEdit() {
+  const { studentId } = useParams<{ studentId: string }>()
 
   const { push, back } = useRouter()
   const pathname = usePathname()
@@ -47,6 +50,7 @@ export default function StudentForm() {
     watch,
     setValue,
     resetField,
+    reset,
     formState: { isLoading, isSubmitting, isValidating },
   } = methods
 
@@ -60,10 +64,10 @@ export default function StudentForm() {
   const timePracticing = watch('timePracticing')
   const periodTime = watch('periodTime')
 
-  const { data: tutor } = useQuery({
-    queryKey: ['tutor', tutorId],
-    enabled: !!tutorId,
-    queryFn: () => getTutorById(tutorId),
+  const { data } = useQuery({
+    queryKey: ['student', studentId],
+    enabled: !!studentId,
+    queryFn: () => getStudentById(studentId),
   })
 
   const { data: schools, isLoading: isLoadingSchools } = useQuery({
@@ -87,7 +91,7 @@ export default function StudentForm() {
   })
 
   const mutation = useMutation({
-    mutationFn: createStudents,
+    mutationFn: editStudent,
     onSuccess: () => {
       if (pathname.includes('registro'))
         push(`${pathname.replace('student', '')}`)
@@ -95,8 +99,8 @@ export default function StudentForm() {
     },
   })
 
-  const createStudent = (formValues: IStudent) =>
-    mutation.mutate({ ...formValues, tutorId, address: tutor?.address })
+  const editStudentSubmit = (formValues: IStudent) =>
+    mutation.mutate({ ...formValues, _id: studentId })
 
   const gradesOptions = currentGradeLevel
     ? currentGradeLevel === 'kup'
@@ -107,11 +111,15 @@ export default function StudentForm() {
   const ageLabel = birthDate && `${age} años`
   const displayNextGrade = isNumber(currentGrade)
   const nextGradeLabel =
-    nextGrade.value === 0
-      ? `Eiby ${nextGrade.level}`
-      : `${nextGrade.value}° ${nextGrade.level}`
+    nextGrade?.value === 0
+      ? `Eiby ${nextGrade?.level}`
+      : `${nextGrade?.value}° ${nextGrade?.level}`
 
   const disableForms = isLoading || isSubmitting || isValidating
+
+  useEffect(() => {
+    data && reset(data)
+  }, [data])
 
   useEffect(() => {
     if (currentGrade === null || !currentGradeLevel) return
@@ -153,10 +161,6 @@ export default function StudentForm() {
     setValue('priorExperienceDays', timePracticingInDays)
   }, [timePracticing, periodTime])
 
-  useEffect(() => {
-    teachers && setValue('teacherId', teachers[0]?.value)
-  }, [teachers])
-
   return (
     <Stack
       direction={'column'}
@@ -164,8 +168,8 @@ export default function StudentForm() {
     >
       <FormContainer
         methods={methods}
-        submitAction={createStudent}
-        buttonLabel={'Guardar'}
+        submitAction={editStudentSubmit}
+        buttonLabel={'Actualizar'}
         isLoading={isLoading}
         disabled={disableForms}
         extraFooterComponents={
@@ -191,7 +195,6 @@ export default function StudentForm() {
           type="text"
           disabled={disableForms}
         />
-
         <RHFAutocomplete
           name="civilStatus"
           label="Estado civil"

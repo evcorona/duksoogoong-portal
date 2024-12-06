@@ -8,6 +8,12 @@ export const getStudents = async () => {
   return get(response, 'data.data.students', [])
 }
 
+export const getStudentById = async (id: string) => {
+  const response = await api.get(`/students/${id}`)
+
+  return get(response, 'data.data.student', [])
+}
+
 export const getStudentsByTutorId = async (tutorId: string) => {
   const response = await api.get(`/students/tutor/${tutorId}`)
 

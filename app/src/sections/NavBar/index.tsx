@@ -91,7 +91,7 @@ export default function NavBar() {
             {!isLogged && (
               <Button
                 onClick={() => push('/login')}
-                sx={{ color: 'text.primary', display: 'block' }}
+                sx={{ color: 'white', display: 'block' }}
               >
                 Iniciar sesión
               </Button>
@@ -131,9 +131,7 @@ export default function NavBar() {
                     handleCloseUserMenu()
                   }}
                 >
-                  <setting.icon
-                    sx={{ color: 'text.primary', marginRight: 1 }}
-                  />
+                  <setting.icon sx={{ color: 'white', marginRight: 1 }} />
                   <Typography sx={{ textAlign: 'center', fontSize: 'small' }}>
                     {setting?.label}
                   </Typography>
