@@ -2,8 +2,7 @@ import "@/src/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import App from "_app";
-import NavBar from "NavBar";
-import { Box } from "@mui/material";
+import NavBar from "@/src/sections/NavBar";
 
 export const metadata = {
   title: "DukSooGoong Portal",
@@ -18,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        {/* <NavBar /> */}
-        <App>{children}</App>
+        <App>
+          <NavBar />
+          {children}
+        </App>
       </body>
     </html>
   );

@@ -43,6 +43,13 @@ export default function ThemeProvider({ children }: Props) {
       fontFamily: `${comicNeue.style.fontFamily}, Arial, sans-serif`,
     },
     components: {
+      MuiMenu: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: brown,
+          },
+        },
+      },
       MuiTypography: {
         styleOverrides: {
           root: {

@@ -2,18 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IPayload {
   userId: string;
-  role: "student" | "tutor" | "teacher" | "admin" | "main";
+  role: "student" | "tutor" | "teacher" | "admin" | "main" | "schoolAdmin";
   isInitialSetup: string;
   schoolId: string;
 }
 
+const initialState = {
+  schoolId: "",
+  role: "",
+  userId: "",
+};
+
 export const userSlice = createSlice({
   name: "user",
-  initialState: {
-    schoolId: "",
-    role: "",
-    userId: "",
-  },
+  initialState,
   reducers: {
     setUserState: () => {
       const token = sessionStorage.getItem("DSG");
@@ -21,12 +23,16 @@ export const userSlice = createSlice({
 
       const tokenPayload = JSON.parse(atob(token.split(".")[1])) as IPayload;
 
-      return tokenPayload;
+      return {
+        schoolId: tokenPayload.schoolId,
+        role: tokenPayload.role,
+        userId: tokenPayload.userId,
+      };
     },
     clearUserState: () => {
       sessionStorage.removeItem("DSG");
 
-      return { schoolId: "", role: "", userId: "" };
+      return initialState;
     },
   },
 });

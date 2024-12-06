@@ -3,17 +3,28 @@
 import { Box, Stack } from "@mui/material";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { IPayload } from "@/src/store/userSlice";
 
 export default function Home() {
+  const authData = useSelector((state: { user: IPayload }) => state);
+
+  const { push } = useRouter();
+
+  useEffect(() => {
+    const { role, userId, schoolId } = authData.user;
+
+    if (role === "schoolAdmin") push(`/schools/${schoolId}`);
+    if (role === "teacher") push(`/schools/${schoolId}/teachers/${userId}`);
+    if (role === "tutor") push(`/tutors/${userId}`);
+    if (role === "admin") push("/schools");
+    if (role === "main") push("/schools");
+  }, [authData]);
+
   return (
-    <Box
-      sx={{
-        backgroundImage: "url(/images/background2.jpg)",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        minHeight: "100vh",
-      }}
-    >
+    <>
       <Stack justifyContent={"center"} alignItems={"center"} height={"90vh"}>
         <Box
           sx={{
@@ -30,6 +41,6 @@ export default function Home() {
           />
         </Box>
       </Stack>
-    </Box>
+    </>
   );
 }
