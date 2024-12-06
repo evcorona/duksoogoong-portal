@@ -2,13 +2,13 @@
 
 import TitleBar from "@/src/components/TitleBar";
 import SchoolForm from "@/schools/sections/SchoolForm";
-import { Container } from "@mui/material";
+import Page from "@/src/components/Page";
 
 export default function CreateSchool() {
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Crear escuela" />
       <SchoolForm />
-    </Container>
+    </Page>
   );
 }

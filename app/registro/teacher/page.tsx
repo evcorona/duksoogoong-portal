@@ -1,14 +1,14 @@
 "use client";
 
 import TeacherForm from "@/schools/[schoolId]/teachers/sections/TeacherForm";
+import Page from "@/src/components/Page";
 import TitleBar from "@/src/components/TitleBar";
-import { Container } from "@mui/material";
 
 export default function TeacherJoin() {
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Registro de Profesor" />
       <TeacherForm />
-    </Container>
+    </Page>
   );
 }

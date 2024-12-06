@@ -1,8 +1,5 @@
 "use client";
 
-import { Box, Stack } from "@mui/material";
-
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -23,24 +20,5 @@ export default function Home() {
     if (role === "main") push("/schools");
   }, [authData]);
 
-  return (
-    <>
-      <Stack justifyContent={"center"} alignItems={"center"} height={"90vh"}>
-        <Box
-          sx={{
-            width: "50%",
-            height: "50%",
-            position: "relative",
-          }}
-        >
-          <Image
-            src={"/logo.png"}
-            alt={"Logo"}
-            layout="fill"
-            objectFit="contain"
-          />
-        </Box>
-      </Stack>
-    </>
-  );
+  return null;
 }

@@ -7,7 +7,7 @@ import { getStudentsBySchoolId } from "@/src/services/students";
 import { getTeachersBySchoolId } from "@/src/services/teachers";
 import { getTutorsBySchoolId } from "@/src/services/tutors";
 import { Face, FamilyRestroom, Groups } from "@mui/icons-material";
-import { Container } from "@mui/material";
+import Page from "@/src/components/Page";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
@@ -41,7 +41,7 @@ export default function School() {
   });
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Escuela" />
       <SummaryPortal
         titleData={{
@@ -82,6 +82,6 @@ export default function School() {
           },
         ]}
       />
-    </Container>
+    </Page>
   );
 }

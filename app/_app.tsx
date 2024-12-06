@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import store, { persistor } from "@/src/store";
 import { PersistGate } from "redux-persist/integration/react";
 import Auth from "@/src/sections/Auth";
+import { Grow } from "@mui/material";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +34,7 @@ export default function App({ children }: { children: React.ReactNode }) {
                   theme="light"
                   transition={Bounce}
                 />
-                <main>{children}</main>
+                {children}
                 <ToastContainer />
               </ThemeProvider>
             </LocalizationProvider>

@@ -1,10 +1,10 @@
 "use client";
 
 import StudentTable from "@/schools/[schoolId]/students/sections/StudentTable";
+import Page from "@/src/components/Page";
 import TitleBar from "@/src/components/TitleBar";
 import { getStudentsByTutorId } from "@/src/services/students";
 import { Add } from "@mui/icons-material";
-import { Container } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, usePathname, useRouter } from "next/navigation";
 
@@ -20,7 +20,7 @@ export default function StudentJoin() {
   });
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar
         title="Registro de Estudiante"
         buttonProps={{
@@ -30,6 +30,6 @@ export default function StudentJoin() {
         }}
       />
       <StudentTable data={data} isLoading={isLoading} />
-    </Container>
+    </Page>
   );
 }

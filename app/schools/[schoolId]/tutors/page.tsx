@@ -5,7 +5,7 @@ import TitleBar from "@/src/components/TitleBar";
 import { TUTORS_HEADERS } from "@/schools/[schoolId]/tutors/constants/tutor.headers";
 import { getTutorsBySchoolId, deleteTutor } from "@/src/services/tutors";
 import { Add } from "@mui/icons-material";
-import { Container } from "@mui/material";
+import Page from "@/src/components/Page";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import SeeDetailButton from "@/src/components/CustomTable/SeeDetailButton";
@@ -27,7 +27,7 @@ export default function Tutors() {
   });
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar
         title="Tutores"
         buttonProps={{
@@ -55,6 +55,6 @@ export default function Tutors() {
           component: SeeDetailButton,
         }}
       />
-    </Container>
+    </Page>
   );
 }

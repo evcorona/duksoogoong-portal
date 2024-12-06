@@ -3,7 +3,7 @@
 import CustomCard from "@/src/components/CustomCard";
 import TitleBar from "@/src/components/TitleBar";
 import { getTeacherById } from "@/src/services/teachers";
-import { Container } from "@mui/material";
+import Page from "@/src/components/Page";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { TEACHERS_HEADERS } from "@/schools/[schoolId]/teachers/constants/teacher.headers";
@@ -28,7 +28,7 @@ export default function TeacherStudents() {
   });
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Detalles del Profesor" />
       <CustomCard
         title="Detalles"
@@ -38,6 +38,6 @@ export default function TeacherStudents() {
       />
       <TitleBar title="Estudiantes" sx={{ marginTop: 3 }} />
       <StudentTable data={students} isLoading={isLoadingStudents} />
-    </Container>
+    </Page>
   );
 }

@@ -5,11 +5,11 @@ import TitleBar from "@/src/components/TitleBar";
 import { SCHOOLS_HEADERS } from "@/schools/constants/schools.headers";
 import { getSchools, deleteSchool } from "@/src/services/schools";
 import { Add } from "@mui/icons-material";
-import { Container } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ISchool } from "@/src/types/School";
+import Page from "@/src/components/Page";
 
 export default function Schools() {
   const [selectedRow, setSelectedRow] = useState<ISchool | null>(null);
@@ -32,7 +32,7 @@ export default function Schools() {
   }, [selectedRow]);
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar
         title="Escuelas"
         buttonProps={{
@@ -58,6 +58,6 @@ export default function Schools() {
           setSelectedRow,
         }}
       />
-    </Container>
+    </Page>
   );
 }

@@ -1,14 +1,14 @@
 "use client";
 
 import StudentForm2 from "@/schools/[schoolId]/students/sections/StudentForm2";
+import Page from "@/src/components/Page";
 import TitleBar from "@/src/components/TitleBar";
-import { Container } from "@mui/material";
 
 export default function StudentJoin() {
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Registro de Estudiantes" />
       <StudentForm2 />
-    </Container>
+    </Page>
   );
 }

@@ -1,14 +1,14 @@
 "use client";
 
 import TutorForm from "@/schools/[schoolId]/tutors/sections/TutorsForm";
+import Page from "@/src/components/Page";
 import TitleBar from "@/src/components/TitleBar";
-import { Container } from "@mui/material";
 
 export default function TutorJoin() {
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar title="Registro de Tutor" />
       <TutorForm />
-    </Container>
+    </Page>
   );
 }

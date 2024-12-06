@@ -1,12 +1,13 @@
 "use client";
 
-import { Container, Stack, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Signup from "@/login/sections/Signup";
+import Page from "@/src/components/Page";
 
 export default function Login() {
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <Stack
         direction="column"
         width="100%"
@@ -28,6 +29,6 @@ export default function Login() {
           <Signup />
         </Stack>
       </Stack>
-    </Container>
+    </Page>
   );
 }

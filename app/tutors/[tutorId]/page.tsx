@@ -3,7 +3,7 @@
 import CustomCard from "@/src/components/CustomCard";
 import TitleBar from "@/src/components/TitleBar";
 import { getTutorById } from "@/src/services/tutors";
-import { Container } from "@mui/material";
+import Page from "@/src/components/Page";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { TUTORS_HEADERS } from "@/schools/[schoolId]/tutors/constants/tutor.headers";
@@ -32,7 +32,7 @@ export default function TutorStudents() {
   });
 
   return (
-    <Container maxWidth="md" sx={{ paddingY: { xs: 2, sm: 4 } }}>
+    <Page>
       <TitleBar
         title="Detalles del Tutor"
         buttonProps={{
@@ -49,6 +49,6 @@ export default function TutorStudents() {
       />
       <TitleBar title="Estudiantes" sx={{ marginTop: 3 }} />
       <StudentTable data={students} isLoading={isLoadingStudents} />
-    </Container>
+    </Page>
   );
 }
