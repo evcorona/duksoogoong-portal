@@ -1,6 +1,7 @@
 import { IAddress } from './Address'
 import { ISchool } from './School'
 import { ITeacher } from './Teacher'
+import { ITutor } from './Tutor'
 
 export interface IStudent {
   _id?: string
@@ -18,12 +19,12 @@ export interface IStudent {
   teacherId: string | ITeacher
   ruf?: string
   userId?: string
-  tutorId?: string
+  tutorId?: string | ITutor
   nextGrade: IGrade
   address: IAddress
 }
 
-interface IGrade {
+export interface IGrade {
   value: number | null
   level: 'kup' | 'poom' | 'dan' | null
   lastGradeUpdatedAt?: Date

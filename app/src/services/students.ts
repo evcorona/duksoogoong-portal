@@ -8,10 +8,12 @@ export const getStudents = async () => {
   return get(response, 'data.data.students', [])
 }
 
-export const getStudentById = async (id: string) => {
+export const getStudentById = async (
+  id: string,
+): Promise<IStudent | undefined> => {
   const response = await api.get(`/students/${id}`)
 
-  return get(response, 'data.data.student', [])
+  return get(response, 'data.data.student', undefined)
 }
 
 export const getStudentsByTutorId = async (tutorId: string) => {

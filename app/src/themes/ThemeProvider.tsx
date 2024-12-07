@@ -43,6 +43,13 @@ export default function ThemeProvider({ children }: Props) {
       fontFamily: `${comicNeue.style.fontFamily}, Arial, sans-serif`,
     },
     components: {
+      MuiDialogContent: {
+        styleOverrides: {
+          root: {
+            backgroundColor: white,
+          },
+        },
+      },
       MuiMenu: {
         styleOverrides: {
           paper: {
@@ -54,6 +61,9 @@ export default function ThemeProvider({ children }: Props) {
         styleOverrides: {
           root: {
             color: white,
+            '&.MuiTypography-subtitle1': {
+              color: black,
+            },
           },
         },
       },

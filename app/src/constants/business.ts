@@ -42,11 +42,11 @@ export const DAN_GRADES = [
 ]
 
 export const CIVIL_STATUSES = [
-  { label: 'Casado(a)', value: 'married' },
-  { label: 'Divorciado(a)', value: 'divorced' },
-  { label: 'Separado(a)', value: 'separated' },
-  { label: 'Soltero(a)', value: 'single' },
-  { label: 'Viudo(a)', value: 'widowed' },
+  { label: 'Casado(a)', value: 'casado(a)' },
+  { label: 'Divorciado(a)', value: 'divorciado(a)' },
+  { label: 'Separado(a)', value: 'separado(a)' },
+  { label: 'Soltero(a)', value: 'soltero(a)' },
+  { label: 'Viudo(a)', value: 'viudo(a)' },
 ]
 
 export const TIME_PERIODS = [
