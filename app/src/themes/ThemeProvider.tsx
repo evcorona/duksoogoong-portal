@@ -43,6 +43,13 @@ export default function ThemeProvider({ children }: Props) {
       fontFamily: `${comicNeue.style.fontFamily}, Arial, sans-serif`,
     },
     components: {
+      MuiDialog: {
+        styleOverrides: {
+          paper: {
+            border: `1px solid gray`,
+          },
+        },
+      },
       MuiDialogContent: {
         styleOverrides: {
           root: {
@@ -92,6 +99,9 @@ export default function ThemeProvider({ children }: Props) {
           root: {
             fontWeight: 'bold',
             boxShadow: 'none',
+            '&.Mui-disabled': {
+              backgroundColor: 'gray',
+            },
             variants: [
               {
                 props: { variant: 'contained', color: 'primary' },

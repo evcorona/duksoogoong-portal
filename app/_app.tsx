@@ -24,7 +24,7 @@ export default function App({ children }: { children: React.ReactNode }) {
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <ThemeProvider>
                 <ToastContainer
-                  position="top-right"
+                  position="bottom-right"
                   autoClose={5000}
                   hideProgressBar={false}
                   newestOnTop={false}

@@ -2,7 +2,7 @@ import { toPng } from 'html-to-image'
 import { jsPDF } from 'jspdf'
 
 export default async function downloadPdf(fileName, elementId) {
-  toPng(document.getElementById(elementId), { quality: 0.95 }).then(
+  await toPng(document.getElementById(elementId), { quality: 0.95 }).then(
     function (dataUrl) {
       const pdf = new jsPDF({
         format: 'letter',

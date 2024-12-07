@@ -12,8 +12,7 @@ export default function ExamFormat(props: Props) {
       gap={2}
       direction={'column'}
       sx={{ padding: 4 }}
-      //  width="1033px"
-      overflow="auto"
+      width="1120px"
       id="exam-format"
     >
       <Header />

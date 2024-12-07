@@ -63,6 +63,7 @@ export default function CustomModal(props: Props) {
               loading={action?.isLoading}
               autoFocus={action?.autoFocus}
               onClick={action.handleAction}
+              loadingPosition="start"
               startIcon={action?.icon}
               variant={action?.autoFocus ? 'contained' : 'text'}
             >
