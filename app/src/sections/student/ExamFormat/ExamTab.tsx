@@ -1,7 +1,7 @@
 import { Stack, Typography } from '@mui/material'
-import ExamTopics from '@/schools/[schoolId]/students/sections/ExamFormat/ExamTopics'
-import ExamFooter from '@/schools/[schoolId]/students/sections/ExamFormat/ExamFooter'
 import CustomDataColumns from '@/src/components/CustomDataColumns'
+import ExamFooter from './ExamFooter'
+import ExamTopics from './ExamTopics'
 
 export default function ExamTab() {
   const fields = [

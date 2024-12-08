@@ -2,8 +2,7 @@ import MESSAGES from '@/src/constants/messages'
 import { editStudent } from '@/src/services/students'
 import { IStudent } from '@/src/types/Student'
 import { useMutation } from '@tanstack/react-query'
-import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/router'
+import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 export default function useEditStudent() {
@@ -27,5 +26,5 @@ export default function useEditStudent() {
   const editStudentSubmit = (formValues: IStudent) =>
     editStudentMutation({ ...formValues })
 
-  return { editStudentSubmit, isCreating: isEditing }
+  return { editStudentSubmit, isEditing }
 }

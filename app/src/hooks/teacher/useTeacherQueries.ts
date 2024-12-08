@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { getTeachersBySchoolId, getTeacherById } from '../../services/teachers'
+import { ITeacher } from '@/src/types/Teacher'
+import { IQueryProps } from '@/src/types/app/QueryProps'
 
-type Props = {
-  enableQueryAll: boolean
-  enableQueryOne: boolean
+interface Props extends IQueryProps {
+  externalSchoolId?: string
 }
 
 export default function useTeacherQueries(props: Props) {
@@ -13,14 +14,27 @@ export default function useTeacherQueries(props: Props) {
     teacherId: string
   }>()
 
+  const targetSchoolId = props.externalSchoolId ?? schoolId
+
   const {
     data: teachersBySchool,
     isLoading: isLoadingAll,
     refetch: refetchAll,
   } = useQuery({
-    queryKey: ['teachersBySchool', schoolId],
-    queryFn: () => getTeachersBySchoolId(schoolId as string),
-    enabled: !!schoolId && props.enableQueryAll,
+    queryKey: ['teachersBySchool', targetSchoolId],
+    queryFn: () => getTeachersBySchoolId(targetSchoolId),
+    enabled: !!targetSchoolId && props.enableQueryAll,
+  })
+
+  const { data: teacherOptions, isLoading: isLoadingOptions } = useQuery({
+    queryKey: ['teacherOptions', targetSchoolId],
+    queryFn: () => getTeachersBySchoolId(targetSchoolId),
+    enabled: !!targetSchoolId && props.enableQueryOptions,
+    select: (data: ITeacher[]) =>
+      data.map(({ _id, name, lastName }) => ({
+        value: _id ?? '',
+        label: `${name.toUpperCase()} ${lastName.toUpperCase()}`,
+      })),
   })
 
   const { data: teacher, isLoading: isLoadingOne } = useQuery({
@@ -29,12 +43,13 @@ export default function useTeacherQueries(props: Props) {
     enabled: !!teacherId && props.enableQueryOne,
   })
 
-  const isLoading = [isLoadingAll, isLoadingOne].some(Boolean)
+  const isLoading = [isLoadingAll, isLoadingOne, isLoadingOptions].some(Boolean)
 
   return {
     isLoading,
     teachersBySchool,
     teacher,
+    teacherOptions,
     refetchAll,
   }
 }

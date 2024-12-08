@@ -15,6 +15,7 @@ const {
   occupation,
   practiceTime,
   priorExperienceDays,
+  hasPriorExperienceDays,
   ruf,
   school,
   teacher,
@@ -25,13 +26,11 @@ export const STUDENTS_HEADERS: ITableData[] = [
   name,
   birthDate,
   age,
-  enrollmentDate,
   practiceTime,
   grade,
-  priorExperienceDays,
+  hasPriorExperienceDays,
   teacher,
   school,
-  tutor,
 ]
 
 export const STUDENTS_DETAILS_HEADERS: ITableData[] = [

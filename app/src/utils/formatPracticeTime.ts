@@ -5,7 +5,10 @@ export function formatPracticeTime(enrollmentDate: Date) {
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
 
-  const label = `${years} años ${months} meses`
+  const yearsLabel = years ? `${years} años` : ''
+  const monthsLabel = months ? `${months} meses` : ''
+
+  const label = `${yearsLabel} ${monthsLabel}`.trim()
 
   return { months, years, label }
 }

@@ -11,11 +11,11 @@ import { Button } from '@mui/material'
 import CustomModal from '@/src/components/CustomModal'
 import { useState } from 'react'
 import { IStudent } from '@/src/types/Student'
-import ExamFormat from '@/schools/[schoolId]/students/sections/ExamFormat'
 import downloadPdf from '@/src/utils/downloadPdf'
 import dayjs from 'dayjs'
 import { toast } from 'react-toastify'
 import { STUDENTS_DETAILS_HEADERS } from '../../../../src/constants/student/students.headers'
+import ExamFormat from '@/src/sections/student/ExamFormat'
 
 export default function StudentDetails() {
   const [openModal, setOpenModal] = useState(false)
@@ -77,15 +77,16 @@ export default function StudentDetails() {
         data={[data]}
         headers={STUDENTS_DETAILS_HEADERS}
         isLoading={isLoading}
-        columnHeight={230}
+        columnHeight={200}
       />
       <CustomModal
-        title="Formato para examen"
+        title="Vista Previa del Formato para Examen"
+        subtitle="Por favor, revisa los datos del estudiante. Cualquier error podría generar confusión en la documentación y ocasionar posibles costos adicionales. Si necesitas hacer cambios, simplemente cierra esta ventana y haz clic en 'Editar Estudiante'"
         open={openModal}
         handleClose={modalToggle}
         dialogActions={[
           {
-            actionLabel: 'Corregir datos',
+            actionLabel: 'Cerrar',
             handleAction: modalToggle,
           },
           {

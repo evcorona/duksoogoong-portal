@@ -18,6 +18,7 @@ interface StudentsPropertiesHeaders {
   occupation: PropertyHeader<IStudent>
   practiceTime: PropertyHeader<IStudent>
   priorExperienceDays: PropertyHeader<IStudent>
+  hasPriorExperienceDays: PropertyHeader<IStudent>
   ruf: PropertyHeader<IStudent>
   school: PropertyHeader<IStudent>
   teacher: PropertyHeader<IStudent>
@@ -31,7 +32,7 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     align: 'left',
     customRow: (value: Pick<IStudent, 'name'>, data: IStudent) => ({
       value: `${value} ${data.lastName}`,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: 'capitalize', whiteSpace: 'nowrap' },
     }),
   },
   birthDate: {
@@ -46,7 +47,10 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     accessor: 'birthDate',
     label: 'Edad',
     align: 'left',
-    customRow: (value) => ({ value: `${dayjs().diff(value, 'year')} años` }),
+    customRow: (value) => ({
+      value: `${dayjs().diff(value, 'year')} años`,
+      styles: { whiteSpace: 'nowrap' },
+    }),
   },
   civilStatus: {
     accessor: 'civilStatus',
@@ -70,17 +74,22 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
   },
   practiceTime: {
     accessor: 'enrollmentDate',
-    label: 'Tiempo de practica',
+    label: 'Tiempo de inscripción',
     align: 'left',
-    customRow: (value) => ({ value: formatPracticeTime(value).label }),
+    customRow: (value) => ({
+      value: formatPracticeTime(value).label,
+      styles: { whiteSpace: 'nowrap' },
+    }),
   },
   grade: {
     accessor: 'grade',
     label: 'Grado',
     align: 'left',
-    customRow: (value) => ({ value: getGradeLabel(value) }),
+    customRow: (value) => ({
+      value: getGradeLabel(value),
+      styles: { whiteSpace: 'nowrap' },
+    }),
   },
-
   occupation: {
     accessor: 'occupation',
     label: 'Ocupación',
@@ -93,11 +102,17 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     align: 'left',
     customRow: (value) => ({ value: formatPriorExperienceDays(value).label }),
   },
+  hasPriorExperienceDays: {
+    accessor: 'priorExperienceDays',
+    label: 'Con Experiencia Previa',
+    align: 'left',
+    customRow: (value) => ({ value: value ? 'Si' : 'No' }),
+  },
   ruf: {
     accessor: 'ruf',
     label: 'RUF',
     align: 'left',
-    customRow: (value) => ({ value: value ?? 'Sin registro' }),
+    customRow: (value) => ({ value: value || 'Sin registro' }),
   },
   teacher: {
     accessor: 'teacher',
@@ -105,7 +120,7 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     align: 'left',
     customRow: (value) => ({
       value: `${value?.name} ${value?.lastName}`,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: 'capitalize', whiteSpace: 'nowrap' },
     }),
   },
   school: {
@@ -114,7 +129,7 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     align: 'left',
     customRow: (value) => ({
       value: value?.name,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: 'capitalize', whiteSpace: 'nowrap' },
     }),
   },
   tutor: {
@@ -123,7 +138,7 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     align: 'left',
     customRow: (value) => ({
       value: `${value?.name} ${value?.lastName}`,
-      styles: { textTransform: 'capitalize' },
+      styles: { textTransform: 'capitalize', whiteSpace: 'nowrap' },
     }),
   },
 }

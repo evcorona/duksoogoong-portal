@@ -1,8 +1,8 @@
 import { IStudent } from '@/src/types/Student'
 import { Stack } from '@mui/material'
-import StudentTab from '@/schools/[schoolId]/students/sections/ExamFormat/StudentTab'
-import Header from '@/schools/[schoolId]/students/sections/ExamFormat/Header'
-import ExamTab from '@/schools/[schoolId]/students/sections/ExamFormat/ExamTab'
+import StudentTab from './StudentTab'
+import Header from './Header'
+import ExamTab from './ExamTab'
 
 type Props = { data: IStudent }
 

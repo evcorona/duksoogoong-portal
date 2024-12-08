@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { TEACHERS_HEADERS } from '@/schools/[schoolId]/teachers/constants/teacher.headers'
 import { deleteStudent, getStudentsByTeacherId } from '@/src/services/students'
-import StudentTable from '@/schools/[schoolId]/students/sections/StudentTable'
+import StudentTable from '@/src/sections/student/StudentTable'
 
 export default function TeacherStudents() {
   const { teacherId } = useParams<{

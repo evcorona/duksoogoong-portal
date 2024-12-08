@@ -1,13 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { getStudentsBySchoolId, getStudentById } from '../../services/students'
+import { IQueryProps } from '@/src/types/app/QueryProps'
 
-type Props = {
-  enableQueryAll: boolean
-  enableQueryOne: boolean
-}
-
-export default function useStudentQueries(props: Props) {
+export default function useStudentQueries(props: IQueryProps) {
   const { schoolId, studentId } = useParams<{
     schoolId: string
     studentId: string
@@ -21,14 +17,14 @@ export default function useStudentQueries(props: Props) {
     refetch: refetchAll,
   } = useQuery({
     queryKey: ['studentsBySchool', schoolId],
-    queryFn: () => getStudentsBySchoolId(schoolId as string),
-    enabled: !!schoolId && props.enableQueryAll,
+    queryFn: () => getStudentsBySchoolId(schoolId),
+    enabled: !!schoolId && !!props.enableQueryAll,
   })
 
   const { data: student, isLoading: isLoadingOne } = useQuery({
     queryKey: ['student', studentId],
     queryFn: () => getStudentById(studentId),
-    enabled: !!studentId && props.enableQueryOne,
+    enabled: !!studentId && !!props.enableQueryOne,
   })
 
   const isLoading = [isLoadingAll, isLoadingOne].some(Boolean)

@@ -1,31 +1,27 @@
 'use client'
 
 import TitleBar from '@/src/components/TitleBar'
-import { deleteStudent, getStudentsBySchoolId } from '@/src/services/students'
+import { deleteStudent } from '@/src/services/students'
 import Page from '@/src/components/Page'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import StudentTable from './sections/StudentTable'
+import { useMutation } from '@tanstack/react-query'
+import StudentTable from '@/src/sections/student/StudentTable'
+import useStudentQueries from '@/src/hooks/student/useStudentQueries'
 
-export default function Students() {
-  const { schoolId } = useParams<{ schoolId: string }>()
-
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['schoolStudents', schoolId],
-    queryFn: () => getStudentsBySchoolId(schoolId as string),
-    enabled: !!schoolId,
+export default function StudentsBySchool() {
+  const { studentsBySchool, isLoading, refetchAll } = useStudentQueries({
+    enableQueryAll: true,
   })
 
   const { mutate: deleteMutation } = useMutation({
     mutationFn: deleteStudent,
-    onSuccess: () => refetch(),
+    onSuccess: () => refetchAll(),
   })
 
   return (
     <Page>
       <TitleBar title="Estudiantes" />
       <StudentTable
-        data={data}
+        data={studentsBySchool || []}
         isLoading={isLoading}
         deleteAction={deleteMutation}
       />

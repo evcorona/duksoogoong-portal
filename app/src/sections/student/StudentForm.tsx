@@ -1,183 +1,88 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 'use client'
 
-import {
-  CIVIL_STATUSES,
-  DAN_VALUES,
-  KUP_VALUES,
-  TIME_PERIODS,
-  LEVELS,
-} from '@/src/constants/business'
+import { CIVIL_STATUSES, TIME_PERIODS, LEVELS } from '@/src/constants/business'
 import { Button, Stack, Typography } from '@mui/material'
 import CustomGridContainer from '@/src/components/CustomGridContainer'
 import FormContainer from '@/src/components/form/FormContainer'
-import { IStudent } from '@/src/types/Student'
 import RHFAutocomplete from '@/src/components/form/RHFAutocomplete'
 import RHFTextField from '@/src/components/form/RHFTextField'
-import { createStudents } from '@/src/services/students'
-import dayjs from 'dayjs'
-import { isNumber } from 'lodash'
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { yupResolver } from '@hookform/resolvers/yup'
-import DEFAULT_STUDENT_VALUES from '../../constants/student/student.default.values'
-import schema from '../../constants/student/student.schema'
 import TitleBar from '@/src/components/TitleBar'
-import { ISchool } from '@/src/types/School'
-import { getSchools } from '@/src/services/schools'
-import { getTeachersBySchoolId } from '@/src/services/teachers'
-import { ITeacher } from '@/src/types/Teacher'
-import { useParams, usePathname, useRouter } from 'next/navigation'
-import { getTutorById } from '@/src/services/tutors'
+import useStudentQueries from '@/src/hooks/student/useStudentQueries'
+import useStudentForm from '@/src/hooks/student/useStudentForm'
+import useSchoolQueries from '@/src/hooks/school/useSchoolQueries'
+import useTeacherQueries from '@/src/hooks/teacher/useTeacherQueries'
+import useCreateStudent from '@/src/hooks/student/useCreateStudent'
+import useEditStudent from '@/src/hooks/student/useEditStudent'
+import { useRouter } from 'next/navigation'
 
 export default function StudentForm() {
-  const { tutorId } = useParams<{ tutorId: string }>()
+  const { back } = useRouter()
 
-  const { push, back } = useRouter()
-  const pathname = usePathname()
+  const { student: studentToEdit, isLoading: isLoadingData } =
+    useStudentQueries({ enableQueryOne: true })
 
-  const methods = useForm<any>({
-    mode: 'onTouched',
-    defaultValues: DEFAULT_STUDENT_VALUES,
-    resolver: yupResolver(schema),
-  })
+  const { methods, gradesOptions, ageLabel, displayNextGrade, nextGradeLabel } =
+    useStudentForm({ studentToEdit })
 
   const {
     watch,
     setValue,
-    resetField,
-    formState: { isLoading, isSubmitting, isValidating },
+    formState: { isValidating, isSubmitSuccessful },
   } = methods
 
-  const birthDate = watch('birthDate')
-  const age = dayjs().diff(birthDate, 'year')
-  const currentGrade = watch('grade.value')
-  const currentGradeLevel = watch('grade.level')
-  const nextGrade = watch('nextGrade')
-  const schoolId = watch('schoolId')
-  const timePracticing = watch('timePracticing')
-  const periodTime = watch('periodTime')
+  const schoolSelected = watch('schoolId')
 
-  const { data: tutor } = useQuery({
-    queryKey: ['tutor', tutorId],
-    enabled: !!tutorId,
-    queryFn: () => getTutorById(tutorId),
+  const { schoolOptions, isLoading: isLoadingSchools } = useSchoolQueries({
+    enableQueryOptions: true,
+  })
+  const { teacherOptions, isLoading: isLoadingTeachers } = useTeacherQueries({
+    enableQueryOptions: true,
+    externalSchoolId: schoolSelected,
   })
 
-  const { data: schools, isLoading: isLoadingSchools } = useQuery({
-    queryKey: ['schools'],
-    queryFn: () => getSchools(),
-    select: (data: ISchool[]) =>
-      data.map(({ _id, name }) => ({
-        value: _id ?? '',
-        label: name.toUpperCase(),
-      })),
-  })
-  const { data: teachers, isLoading: isLoadingTeachers } = useQuery({
-    queryKey: ['teachers', schoolId],
-    queryFn: () => getTeachersBySchoolId(schoolId),
-    enabled: !!schoolId,
-    select: (data: ITeacher[]) =>
-      data.map(({ _id, name, lastName }) => ({
-        value: _id ?? '',
-        label: `${name.toUpperCase()} ${lastName.toUpperCase()}`,
-      })),
-  })
+  const { createStudentSubmit, isCreating } = useCreateStudent()
+  const { editStudentSubmit, isEditing } = useEditStudent()
 
-  const mutation = useMutation({
-    mutationFn: createStudents,
-    onSuccess: () => {
-      if (pathname.includes('registro'))
-        push(`${pathname.replace('student', '')}`)
-      else back()
-    },
-  })
+  const submitAction = studentToEdit ? editStudentSubmit : createStudentSubmit
+  const buttonLabel = studentToEdit ? 'Guardar cambios' : 'Crear estudiante'
 
-  const createStudent = (formValues: IStudent) =>
-    mutation.mutate({ ...formValues, tutorId, address: tutor?.address })
+  const disableForms = [
+    isValidating,
+    isLoadingData,
+    isCreating,
+    isEditing,
+    isSubmitSuccessful,
+  ].some(Boolean)
 
-  const gradesOptions = currentGradeLevel
-    ? currentGradeLevel === 'kup'
-      ? KUP_VALUES
-      : DAN_VALUES
-    : []
-
-  const ageLabel = birthDate && `${age} años`
-  const displayNextGrade = isNumber(currentGrade)
-  const nextGradeLabel =
-    nextGrade.value === 0
-      ? `Eiby ${nextGrade.level}`
-      : `${nextGrade.value}° ${nextGrade.level}`
-
-  const disableForms = isLoading || isSubmitting || isValidating
+  const isLoading = [isValidating, isCreating, isEditing].some(Boolean)
 
   useEffect(() => {
-    if (currentGrade === null || !currentGradeLevel) return
-
-    const currentBlackType =
-      currentGradeLevel === 'dan' || currentGradeLevel === 'poom'
-    const typeBlackGrade = age < 15 ? 'poom' : 'dan'
-    let nextGrade = DEFAULT_STUDENT_VALUES.nextGrade
-
-    if (currentBlackType)
-      nextGrade = {
-        value: Number(currentGrade) + 1,
-        level: typeBlackGrade,
-      }
-    if (currentGradeLevel === 'kup')
-      nextGrade = {
-        value: Number(currentGrade) - 1,
-        level: 'kup',
-      }
-    if (currentGradeLevel === 'kup' && currentGrade === 0) {
-      resetField('grade')
-      resetField('nextGrade')
-    }
-    if (currentGradeLevel === 'kup' && currentGrade === 1)
-      nextGrade = {
-        value: 0,
-        level: typeBlackGrade,
-      }
-    setValue('nextGrade', nextGrade)
-  }, [currentGrade, currentGradeLevel, age])
-
-  useEffect(() => {
-    if (timePracticing === null || periodTime === null)
-      setValue('priorExperienceDays', 0)
-
-    const periodTimeMultiplier = periodTime === 'months' ? 30 : 365
-    const timePracticingInDays = timePracticing * periodTimeMultiplier
-
-    setValue('priorExperienceDays', timePracticingInDays)
-  }, [timePracticing, periodTime])
-
-  useEffect(() => {
-    teachers && setValue('teacherId', teachers[0]?.value)
-  }, [teachers])
+    if (teacherOptions && !studentToEdit)
+      setValue('teacherId', teacherOptions[0]?.value)
+  }, [teacherOptions])
 
   return (
-    <Stack
-      direction={'column'}
-      gap={4}
-    >
+    <Stack gap={4}>
       <FormContainer
         methods={methods}
-        submitAction={createStudent}
-        buttonLabel={'Guardar'}
+        submitAction={submitAction}
+        buttonLabel={buttonLabel}
         isLoading={isLoading}
         disabled={disableForms}
         extraFooterComponents={
-          <>
-            <Button
-              variant="outlined"
-              onClick={back}
-            >
-              Cancelar
-            </Button>
-          </>
+          <Button
+            variant="outlined"
+            onClick={back}
+          >
+            Cancelar
+          </Button>
         }
       >
+        <TitleBar
+          title="Datos personales"
+          isSectionTitle
+        />
         <RHFTextField
           name="name"
           label="Nombre"
@@ -234,12 +139,6 @@ export default function StudentForm() {
             </Typography>
           )}
         </CustomGridContainer>
-        <RHFTextField
-          name="enrollmentDate"
-          label="Fecha de inscripción"
-          type="date"
-          disabled={disableForms}
-        />
         <TitleBar
           title="Tiempo de practica previa"
           isSectionTitle
@@ -267,12 +166,28 @@ export default function StudentForm() {
             options={TIME_PERIODS}
           />
         </CustomGridContainer>
+        <TitleBar
+          title="Datos Escolares"
+          isSectionTitle
+        />
+        <RHFTextField
+          name="ruf"
+          label="Registro Único Federado - RUF (Opcional)"
+          type="text"
+          disabled={disableForms}
+        />
+        <RHFTextField
+          name="enrollmentDate"
+          label="Fecha de inscripción"
+          type="date"
+          disabled={disableForms}
+        />
         <RHFAutocomplete
           disableClearable
           name="schoolId"
           label="Escuela"
           noOptionsText="Seleccionar escuela"
-          options={schools || []}
+          options={schoolOptions || []}
           loading={isLoadingSchools}
           disabled={disableForms}
         />
@@ -281,7 +196,7 @@ export default function StudentForm() {
           name="teacherId"
           label="Profesor"
           noOptionsText="Seleccionar profesor"
-          options={teachers || []}
+          options={teacherOptions || []}
           loading={isLoadingTeachers}
           disabled={disableForms}
         />

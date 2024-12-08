@@ -1,8 +1,8 @@
 'use client'
 
-import StudentTable from '@/schools/[schoolId]/students/sections/StudentTable'
 import Page from '@/src/components/Page'
 import TitleBar from '@/src/components/TitleBar'
+import StudentTable from '@/src/sections/student/StudentTable'
 import { deleteStudent, getStudentsByTutorId } from '@/src/services/students'
 import { Add } from '@mui/icons-material'
 import { useMutation, useQuery } from '@tanstack/react-query'

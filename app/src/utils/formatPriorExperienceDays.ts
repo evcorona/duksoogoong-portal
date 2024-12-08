@@ -7,6 +7,7 @@ export default function formatPriorExperienceDays(priorExperienceDays: number) {
   const result = {
     label: 'Sin experiencia previa',
     value: 0,
+    periodType: '',
   }
 
   if (!priorExperienceDays) return result
@@ -18,11 +19,13 @@ export default function formatPriorExperienceDays(priorExperienceDays: number) {
   if (totalDays < DAYS_IN_YEAR) {
     const months = Math.round(duration.asMonths())
     result.value = months
-    result.label = `${months} meses`
+    result.label = months ? `${months} meses` : ''
+    result.periodType = 'months'
   } else {
     const years = Math.round(duration.asYears())
     result.value = years
-    result.label = `${years} años`
+    result.label = years ? `${years} años` : ''
+    result.periodType = 'years'
   }
 
   return result

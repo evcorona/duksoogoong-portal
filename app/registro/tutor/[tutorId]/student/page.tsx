@@ -1,8 +1,8 @@
 'use client'
 
-import StudentForm from '@/schools/[schoolId]/students/sections/StudentForm'
 import Page from '@/src/components/Page'
 import TitleBar from '@/src/components/TitleBar'
+import StudentForm from '@/src/sections/student/StudentForm'
 
 export default function StudentJoin() {
   return (

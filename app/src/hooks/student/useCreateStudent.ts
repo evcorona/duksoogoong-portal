@@ -2,8 +2,7 @@ import MESSAGES from '@/src/constants/messages'
 import { createStudents } from '@/src/services/students'
 import { IStudent } from '@/src/types/Student'
 import { useMutation } from '@tanstack/react-query'
-import { useParams, usePathname } from 'next/navigation'
-import { useRouter } from 'next/router'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 export default function useCreateStudent() {

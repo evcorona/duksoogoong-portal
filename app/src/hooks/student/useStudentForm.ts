@@ -8,8 +8,9 @@ import { useEffect } from 'react'
 import { IStudent } from '@/src/types/Student'
 import { isNumber } from 'lodash'
 import { getGradeLabel } from '@/src/utils/formatGrades'
+import formatPriorExperienceDays from '@/src/utils/formatPriorExperienceDays'
 
-type Props = { data?: IStudent; teachers: any[] }
+type Props = { studentToEdit?: IStudent }
 
 export default function useStudentForm(props: Props) {
   const methods = useForm<any>({
@@ -18,13 +19,7 @@ export default function useStudentForm(props: Props) {
     resolver: yupResolver(schema),
   })
 
-  const {
-    watch,
-    setValue,
-    reset,
-    resetField,
-    formState: { isLoading, isSubmitting, isValidating },
-  } = methods
+  const { watch, setValue, reset, resetField } = methods
 
   const birthDate = watch('birthDate')
   const age = dayjs().diff(birthDate, 'year')
@@ -35,8 +30,21 @@ export default function useStudentForm(props: Props) {
   const periodTime = watch('periodTime')
 
   useEffect(() => {
-    props.data && reset(props.data)
-  }, [props.data])
+    if (props.studentToEdit) {
+      const timePracticing = formatPriorExperienceDays(
+        props.studentToEdit.priorExperienceDays,
+      )
+      reset({
+        ...props.studentToEdit,
+        birthDate: dayjs(props.studentToEdit.birthDate).format('YYYY-MM-DD'),
+        enrollmentDate: dayjs(props.studentToEdit.enrollmentDate).format(
+          'YYYY-MM-DD',
+        ),
+        timePracticing: timePracticing.value,
+        periodTime: timePracticing.periodType,
+      })
+    }
+  }, [props.studentToEdit])
 
   useEffect(() => {
     if (currentGrade === null || !currentGradeLevel) return
@@ -78,11 +86,6 @@ export default function useStudentForm(props: Props) {
     setValue('priorExperienceDays', timePracticingInDays)
   }, [timePracticing, periodTime])
 
-  useEffect(() => {
-    if (props.teachers && props.data)
-      setValue('teacherId', props.teachers[0]?.value)
-  }, [props.teachers])
-
   return {
     methods,
     gradesOptions: currentGradeLevel
@@ -93,6 +96,5 @@ export default function useStudentForm(props: Props) {
     ageLabel: birthDate && `${age} años`,
     displayNextGrade: isNumber(currentGrade),
     nextGradeLabel: getGradeLabel(nextGrade),
-    disableForms: [isLoading, isSubmitting, isValidating].some(Boolean),
   }
 }

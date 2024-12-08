@@ -16,6 +16,7 @@ export interface ITableData {
   subLabel?: string
   icon?: string
   align?: 'left' | 'center' | 'right'
+  translate?: boolean
   customRow?: (value: any, data?: any) => ICustomRow
 }
 
@@ -25,5 +26,6 @@ export interface PropertyHeader<T> {
   subLabel?: string
   icon?: string
   align?: 'left' | 'center' | 'right'
+  translate?: boolean
   customRow?: (value: any, data: T) => ICustomRow
 }

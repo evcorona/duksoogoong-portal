@@ -2,9 +2,8 @@
 
 import { TableCell, TableRow, Typography } from '@mui/material'
 
-import Image from 'next/image'
 import { Stack } from '@mui/material'
-import { useTranslation } from 'next-i18next'
+import { SearchOff } from '@mui/icons-material'
 
 type Props = {
   title: string
@@ -12,7 +11,7 @@ type Props = {
 }
 
 export default function EmptyContent(props: Props) {
-  const { t } = useTranslation()
+  console.log('EmptyContent props:', props)
 
   return (
     <TableRow>
@@ -26,14 +25,11 @@ export default function EmptyContent(props: Props) {
           justifyContent="center"
           gap={2}
         >
-          <Image
-            width={150}
-            height={142}
-            src="/assets/icons/filesleep.svg"
-            alt="File Sleeping"
-          />
-          <Typography variant="h5">{t(props.title)}</Typography>
-          <Typography maxWidth={670}>{t(props.description)}</Typography>
+          <SearchOff sx={{ fontSize: '100px', color: 'gray' }} />
+          <Typography fontSize={'large'}>No hay registros</Typography>
+          <Typography maxWidth={'xs'}>
+            Aún no se han creado registros.
+          </Typography>
         </Stack>
       </TableCell>
     </TableRow>

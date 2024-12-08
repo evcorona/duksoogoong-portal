@@ -8,8 +8,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import { TUTORS_HEADERS } from '@/schools/[schoolId]/tutors/constants/tutor.headers'
 import { deleteStudent, getStudentsByTutorId } from '@/src/services/students'
-import StudentTable from '@/schools/[schoolId]/students/sections/StudentTable'
 import { Add } from '@mui/icons-material'
+import StudentTable from '@/src/sections/student/StudentTable'
 
 export default function TutorStudents() {
   const { push } = useRouter()

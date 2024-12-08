@@ -7,12 +7,14 @@ import {
   DialogActions,
   IconButton,
   SxProps,
+  Typography,
 } from '@mui/material'
 
 type Props = {
   handleClose: () => void
   open: boolean
   title: string
+  subtitle?: string
   children: React.ReactNode
   dialogActions: {
     actionLabel: string
@@ -49,7 +51,19 @@ export default function CustomModal(props: Props) {
       >
         <Close />
       </IconButton>
-      <DialogTitle>{props.title}</DialogTitle>
+      <DialogTitle>
+        {props.title}
+        <Typography
+          sx={{
+            fontSize: 'small',
+            color: 'lightgray',
+            marginTop: 2,
+          }}
+        >
+          {props.subtitle}
+        </Typography>
+      </DialogTitle>
+
       <DialogContent dividers>{props.children}</DialogContent>
       <DialogActions
         sx={{
