@@ -1,4 +1,4 @@
-export const TYPE_GRADES = [
+export const LEVELS = [
   {
     value: 'kup',
     label: 'kup',
@@ -13,7 +13,7 @@ export const TYPE_GRADES = [
   },
 ]
 
-export const KUP_GRADES = [
+export const KUP_VALUES = [
   { value: 11, label: 'Principiante', subLabel: 'blanca' },
   { value: 10, label: '10°', subLabel: 'naranja' },
   { value: 9, label: '9°', subLabel: 'amarilla' },
@@ -27,7 +27,7 @@ export const KUP_GRADES = [
   { value: 1, label: '1°', subLabel: 'roja' },
 ]
 
-export const DAN_GRADES = [
+export const DAN_VALUES = [
   { value: 0, label: 'ieby', subLabel: 'roja-avanzada' },
   { value: 1, label: '1°' },
   { value: 2, label: '2°' },

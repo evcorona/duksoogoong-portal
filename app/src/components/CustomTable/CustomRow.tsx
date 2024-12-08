@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 import { isArray, isBoolean } from 'lodash'
 
-import { CustomRowProps } from '@/src/types/Table'
+import { CustomRowProps } from '@/src/types/table/Table'
 import SvgIconStyle from 'src/components/SvgIconStyle'
 import TableMenu from 'src/components/CustomTable/TableMenu'
 

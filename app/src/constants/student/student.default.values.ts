@@ -1,20 +1,20 @@
-import ADDRESS_DEFAULT_VALUES from '@/src/constants/defaultsValues/address.default.values'
-import { IStudent } from '@/src/types/Student'
+import ADDRESS_DEFAULT_VALUES from '@/src/constants/address/address.default.values'
+import { IStudentForm } from '@/src/types/Student'
 
-const DEFAULT_STUDENT_VALUES: IStudent = {
+const DEFAULT_STUDENT_VALUES: IStudentForm = {
   name: '',
   lastName: '',
   curp: '',
   ruf: '',
-  civilStatus: 'single',
+  civilStatus: 'soltero(a)',
   occupation: '',
   birthDate: null,
   enrollmentDate: null,
   priorExperienceDays: 0,
   isActive: true,
   grade: {
-    value: null,
-    level: null,
+    value: 11,
+    level: 'kup',
     lastGradeUpdatedAt: undefined,
   },
   schoolId: '',
@@ -23,8 +23,8 @@ const DEFAULT_STUDENT_VALUES: IStudent = {
   tutorId: undefined,
   address: ADDRESS_DEFAULT_VALUES,
   nextGrade: {
-    value: null,
-    level: null,
+    value: 10,
+    level: 'kup',
   },
 }
 

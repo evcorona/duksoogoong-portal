@@ -15,7 +15,7 @@ import TableSkeleton from 'src/components/CustomTable/TableSkeleton'
 import EmptyContent from 'src/components/CustomTable/EmptyContent'
 import { useEffect } from 'react'
 import CheckboxMenuBar from 'src/components/CustomTable/CheckboxMenuBar'
-import { CustomTableProps } from '@/src/types/Table'
+import { CustomTableProps } from '@/src/types/table/Table'
 import { FilterProps } from '@/src/types/Filter'
 import { isEmpty } from 'lodash'
 

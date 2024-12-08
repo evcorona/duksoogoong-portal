@@ -1,10 +1,9 @@
 import CustomTable from '@/src/components/CustomTable/CustomTable'
 
 import { IStudent } from '@/src/types/Student'
-import { STUDENTS_HEADERS } from '../constants/students.headers'
+import { STUDENTS_HEADERS } from '@/src/constants/student/students.headers'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { ISchool } from '@/src/types/School'
 
 type Props = {
   data: IStudent[]
@@ -19,9 +18,8 @@ export default function StudentTable(props: Props) {
 
   useEffect(() => {
     if (selectedRow) {
-      const schoolId = selectedRow?.schoolId as ISchool
-
-      push(`/schools/${schoolId?._id}/students/${selectedRow?._id}`)
+      const schoolId = selectedRow?.schoolId
+      push(`/schools/${schoolId}/students/${selectedRow?._id}`)
     }
   }, [selectedRow])
 
@@ -34,7 +32,7 @@ export default function StudentTable(props: Props) {
       isLoading={props.isLoading}
       menuProps={{
         editAction: (data) =>
-          push(`/schools/${data?.schoolId?._id}/students/${data?._id}/edit`),
+          push(`/schools/${data?.schoolId}/students/${data?._id}/edit`),
         deleteAction: (data) => props.deleteAction(data?._id),
       }}
       sx={{ marginTop: 2, paddingBottom: 2 }}

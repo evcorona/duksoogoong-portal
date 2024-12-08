@@ -14,7 +14,7 @@ import {
 import CustomDialog from 'src/components/CustomDialog'
 import { useTranslation } from 'next-i18next'
 import { MouseEvent, useState } from 'react'
-import { TableMenuProps } from '@/src/types/Table'
+import { TableMenuProps } from '@/src/types/table/Table'
 
 interface Props extends TableMenuProps {
   data: any

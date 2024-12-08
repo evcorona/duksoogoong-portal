@@ -5,17 +5,17 @@ import Page from '@/src/components/Page'
 import TitleBar from '@/src/components/TitleBar'
 import { Download, Edit, FileOpen } from '@mui/icons-material'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { STUDENTS_DETAILS_HEADERS } from '../constants/students.details.headers'
 import { getStudentById } from '@/src/services/students'
 import { useQuery } from '@tanstack/react-query'
 import { Button } from '@mui/material'
 import CustomModal from '@/src/components/CustomModal'
 import { useState } from 'react'
 import { IStudent } from '@/src/types/Student'
-import ExamFormat from '../sections/ExamFormat'
+import ExamFormat from '@/schools/[schoolId]/students/sections/ExamFormat'
 import downloadPdf from '@/src/utils/downloadPdf'
 import dayjs from 'dayjs'
 import { toast } from 'react-toastify'
+import { STUDENTS_DETAILS_HEADERS } from '../../../../src/constants/student/students.headers'
 
 export default function StudentDetails() {
   const [openModal, setOpenModal] = useState(false)
@@ -23,14 +23,11 @@ export default function StudentDetails() {
 
   const { push } = useRouter()
   const pathname = usePathname()
-
-  const { studentId } = useParams<{
-    studentId: string
-  }>()
+  const { studentId } = useParams<{ studentId: string }>()
 
   const { data, isLoading } = useQuery({
     queryKey: ['student', studentId],
-    queryFn: () => getStudentById(studentId as string),
+    queryFn: () => getStudentById(studentId),
     enabled: !!studentId,
   })
 
@@ -62,12 +59,14 @@ export default function StudentDetails() {
           label: 'editar estudiante',
           icon: <Edit />,
           onClick: () => push(`${pathname}/edit`),
+          disabled: isLoading || !data,
         }}
         extraContent={
           <Button
             variant="outlined"
             startIcon={<FileOpen />}
             onClick={modalToggle}
+            disabled={isLoading || !data}
           >
             Formato para examen
           </Button>

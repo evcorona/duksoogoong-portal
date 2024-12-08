@@ -1,6 +1,6 @@
 import CustomDataColumns from '@/src/components/CustomDataColumns'
 import { IStudent } from '@/src/types/Student'
-import { currentGradeToString, getNextGrade } from '@/src/utils/formatGrades'
+import { getGradeLabel, getNextGrade } from '@/src/utils/formatGrades'
 import { formatPracticeTime } from '@/src/utils/formatPracticeTime'
 import { Stack, Typography } from '@mui/material'
 import dayjs from 'dayjs'
@@ -10,25 +10,21 @@ type Props = {
 }
 
 export default function StudentTab(props: Props) {
-  const age = dayjs().diff(props.data.birthDate, 'year')
-  const birthDate = dayjs(props.data.birthDate).format('DD/MM/YYYY')
+  const { data } = props
 
-  const studentName = `${props.data.name} ${props.data.lastName}`
-
-  const practiceTime = formatPracticeTime(
-    props.data.enrollmentDate as Date,
-  ).string
-
-  const schoolName = props.data.schoolId?.name ?? ''
-  const teacherName = `${props.data.teacherId?.name} ${props.data.teacherId?.lastName}`
-
-  const currentGrade = currentGradeToString(props.data.grade)
-  const nextGrade = getNextGrade(props.data.grade, age).string
+  const age = dayjs().diff(data?.birthDate, 'year')
+  const birthDate = dayjs(data?.birthDate).format('YYYY/MM/DD')
+  const studentName = `${data?.name} ${data?.lastName}`
+  const practiceTime = formatPracticeTime(data?.enrollmentDate as Date).label
+  const schoolName = data?.school?.name
+  const teacherName = `${data?.teacher?.name} ${data?.teacher?.lastName}`
+  const currentGrade = getGradeLabel(data?.grade)
+  const nextGrade = getNextGrade(data?.grade, age).label
 
   const fields = [
     [
-      { label: 'Ocupación', value: props.data.occupation },
-      { label: 'Estado civil', value: props.data.civilStatus },
+      { label: 'Ocupación', value: data?.occupation },
+      { label: 'Estado civil', value: data?.civilStatus },
       { label: 'Fecha de nacimiento', value: birthDate },
     ],
     [

@@ -5,27 +5,32 @@ import { ITutor } from './Tutor'
 
 export interface IStudent {
   _id?: string
+  address?: IAddress
   birthDate: Date | null
-  civilStatus: 'married' | 'divorced' | 'separated' | 'single' | 'widowed'
+  civilStatus: string
   curp: string
   enrollmentDate: Date | null
   grade: IGrade
   isActive: boolean
   lastName: string
   name: string
+  nextGrade: IGrade
   occupation: string
   priorExperienceDays: number
-  schoolId: string | ISchool
-  teacherId: string | ITeacher
   ruf?: string
+  school: ISchool
+  schoolId: string
+  teacher: ITeacher
+  teacherId: string
+  tutor?: ITutor
+  tutorId?: string
   userId?: string
-  tutorId?: string | ITutor
-  nextGrade: IGrade
-  address: IAddress
 }
 
+export type IStudentForm = Omit<IStudent, 'school' | 'teacher' | 'tutor'>
+
 export interface IGrade {
-  value: number | null
-  level: 'kup' | 'poom' | 'dan' | null
   lastGradeUpdatedAt?: Date
+  level: 'kup' | 'poom' | 'dan'
+  value: number
 }

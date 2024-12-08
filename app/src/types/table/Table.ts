@@ -3,7 +3,7 @@
 import { CheckboxFeature } from './CheckboxFeature'
 import { ReactElement } from 'react'
 import { SxProps } from '@mui/material'
-import { ITableData } from './table/TableData'
+import { ITableData } from './TableData'
 
 export interface CustomTableProps {
   headers: ITableData[]

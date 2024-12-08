@@ -16,16 +16,15 @@ import { ISchool } from '@/src/types/School'
 
 export default function SchoolForm() {
   const { back } = useRouter()
-
   const { schoolId } = useParams<{ schoolId: string }>()
 
   const { data, isLoading } = useQuery({
     queryKey: ['school', schoolId],
-    queryFn: () => getSchoolById(schoolId as string),
+    queryFn: () => getSchoolById(schoolId),
     enabled: !!schoolId,
   })
 
-  const methods = useForm<any>({
+  const methods = useForm({
     mode: 'onTouched',
     defaultValues: DEFAULT_SCHOOL_VALUES,
     resolver: yupResolver(schema),

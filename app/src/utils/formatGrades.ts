@@ -1,8 +1,7 @@
-import { values } from 'lodash'
 import { IGrade } from '../types/Student'
-import DEFAULT_STUDENT_VALUES from '@/schools/[schoolId]/students/constants/student.default.values'
+import DEFAULT_STUDENT_VALUES from '@/src/constants/student/student.default.values'
 
-export function currentGradeToString(grade: IGrade) {
+export function getGradeLabel(grade: IGrade) {
   const value = grade?.value === 0 ? 'Ieby' : grade?.value
   const level = grade?.level
 
@@ -41,7 +40,7 @@ export function getNextGrade(currentGrade: IGrade, age: number) {
       level: typeBlackGrade,
     }
 
-  const nextGradeToString = `${nextGrade.value}° ${nextGrade.level}`
+  const label = `${nextGrade.value}° ${nextGrade.level}`
 
-  return { nextGrade, string: nextGradeToString }
+  return { nextGrade, label }
 }

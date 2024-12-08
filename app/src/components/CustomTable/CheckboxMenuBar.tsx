@@ -3,7 +3,7 @@
 import {
   CheckboxButtonProps,
   CheckboxFeature,
-} from '@/src/types/CheckboxFeature'
+} from '@/src/types/table/CheckboxFeature'
 import {
   DeleteOutline,
   EditOutlined,

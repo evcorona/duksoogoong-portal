@@ -3,10 +3,10 @@
 
 import {
   CIVIL_STATUSES,
-  DAN_GRADES,
-  KUP_GRADES,
+  DAN_VALUES,
+  KUP_VALUES,
   TIME_PERIODS,
-  TYPE_GRADES,
+  LEVELS,
 } from '@/src/constants/business'
 import { Button, Stack, Typography } from '@mui/material'
 import CustomGridContainer from '@/src/components/CustomGridContainer'
@@ -21,8 +21,8 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { yupResolver } from '@hookform/resolvers/yup'
-import DEFAULT_STUDENT_VALUES from '../constants/student.default.values'
-import schema from '../constants/student.schema'
+import DEFAULT_STUDENT_VALUES from '../../constants/student/student.default.values'
+import schema from '../../constants/student/student.schema'
 import TitleBar from '@/src/components/TitleBar'
 import { ISchool } from '@/src/types/School'
 import { getSchools } from '@/src/services/schools'
@@ -56,7 +56,6 @@ export default function StudentForm() {
   const currentGradeLevel = watch('grade.level')
   const nextGrade = watch('nextGrade')
   const schoolId = watch('schoolId')
-
   const timePracticing = watch('timePracticing')
   const periodTime = watch('periodTime')
 
@@ -100,8 +99,8 @@ export default function StudentForm() {
 
   const gradesOptions = currentGradeLevel
     ? currentGradeLevel === 'kup'
-      ? KUP_GRADES
-      : DAN_GRADES
+      ? KUP_VALUES
+      : DAN_VALUES
     : []
 
   const ageLabel = birthDate && `${age} años`
@@ -294,7 +293,7 @@ export default function StudentForm() {
           <RHFAutocomplete
             name="grade.level"
             label="Nivel actual"
-            options={TYPE_GRADES}
+            options={LEVELS}
             disableClearable
             disabled={disableForms}
             noOptionsText="Seleccionar nivel actual"

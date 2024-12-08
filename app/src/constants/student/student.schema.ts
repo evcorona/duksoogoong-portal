@@ -20,13 +20,7 @@ export default yup.object().shape({
   lastName: stringSchema,
   curp: yup.string().trim().uppercase().required('Campo requerido'),
   ruf: yup.string().trim().uppercase(),
-  civilStatus: enumStringSchema([
-    'married',
-    'divorced',
-    'separated',
-    'single',
-    'widowed',
-  ]),
+  civilStatus: stringSchema,
   occupation: stringSchema,
   birthDate: yup
     .date()

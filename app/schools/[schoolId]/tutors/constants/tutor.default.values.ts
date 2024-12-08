@@ -1,4 +1,4 @@
-import ADDRESS_DEFAULT_VALUES from '@/src/constants/defaultsValues/address.default.values'
+import ADDRESS_DEFAULT_VALUES from '@/src/constants/address/address.default.values'
 import { ITutor } from '@/src/types/Tutor'
 
 const DEFAULT_TUTOR_VALUES: ITutor = {

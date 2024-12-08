@@ -17,7 +17,7 @@ import { useEffect } from 'react'
 import { ITeacher } from '@/src/types/Teacher'
 import RHFSwitch from '@/src/components/form/RHFSwitch'
 import RHFAutocomplete from '@/src/components/form/RHFAutocomplete'
-import { DAN_GRADES } from '@/src/constants/business'
+import { DAN_VALUES } from '@/src/constants/business'
 import { PHONE_MASK } from '@/src/constants/inputMasks'
 import { getSchools } from '@/src/services/schools'
 import { ISchool } from '@/src/types/School'
@@ -137,7 +137,7 @@ export default function TeacherForm() {
         name="grade"
         label="Grado actual"
         noOptionsText="Seleccionar nivel actual"
-        options={DAN_GRADES.slice(1, DAN_GRADES.length).map((option) => ({
+        options={DAN_VALUES.slice(1, DAN_VALUES.length).map((option) => ({
           ...option,
           label: `${option.label} dan`,
         }))}
