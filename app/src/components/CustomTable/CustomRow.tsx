@@ -165,6 +165,7 @@ export default function CustomRow(props: CustomRowProps) {
           align="center"
           sx={{
             borderBottom: '1px solid #EAEEF4',
+            padding: '0',
           }}
         >
           <props.rowComponentProps.component
@@ -178,7 +179,6 @@ export default function CustomRow(props: CustomRowProps) {
       )}
       {props.menuProps && (
         <TableCell
-          align="center"
           sx={{
             borderBottom: '1px solid #EAEEF4',
             width: '50px',

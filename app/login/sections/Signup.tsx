@@ -11,20 +11,19 @@ export default function Signup() {
     {
       title: 'Tutor',
       subtitle:
-        'Registra a tus hijos y accede fácilmente a su información escolar.',
+        'Registra a tus hijos, accede fácilmente a su información escolar y sigue su progreso académico',
       onClick: () => push(`${pathname}/tutor`),
     },
     {
       title: 'Profesor',
-      subtitle:
-        'Gestiona y administra tu escuela de Taekwondo de manera eficiente.',
+      subtitle: 'Gestiona tu escuela y/o estudiantes de manera eficiente',
       onClick: () => push(`${pathname}/teacher`),
     },
     {
-      title: 'Alumno',
+      title: 'Estudiante',
       subtitle:
-        'Inscríbete en una escuela y sigue tu progreso académico. Solo para mayores de edad.',
-      onClick: () => push(`${pathname}/adult`),
+        'Regístrate en una escuela y sigue tu progreso académico. Solo para mayores de edad',
+      onClick: () => push(`${pathname}/student`),
     },
   ]
   return (
@@ -45,7 +44,7 @@ export default function Signup() {
               cursor: 'pointer',
               padding: 2,
               width: 300,
-              height: 200,
+              height: 170,
               ':hover': {
                 background:
                   'linear-gradient(180deg, rgba(253,246,12,1) 0%, rgba(254,253,230,1) 100%)',

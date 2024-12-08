@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux'
 import { IPayload } from '@/src/store/userSlice'
 
 export default function Home() {
-  const authData = useSelector((state: { user: IPayload }) => state)
+  const authData = useSelector((state: { user: IPayload }) => state.user)
 
   const { push } = useRouter()
 
   useEffect(() => {
-    const { role, userId, schoolId } = authData.user
+    const { role, userId, schoolId } = authData
 
     if (!role) push('/login')
     if (role === 'schoolAdmin') push(`/schools/${schoolId}`)

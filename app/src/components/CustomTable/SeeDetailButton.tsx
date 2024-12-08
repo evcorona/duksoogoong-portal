@@ -18,7 +18,6 @@ export default function SeeDetailButton(props: Props) {
       target={props?.openInNewTab ? '_blank' : undefined}
     >
       <Button
-        size="small"
         variant="text"
         sx={{ whiteSpace: 'nowrap' }}
       >

@@ -8,7 +8,7 @@ import { Add } from '@mui/icons-material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
-export default function StudentJoin() {
+export default function TutorJoin() {
   const { tutorId } = useParams<{ tutorId: string }>()
   const { push } = useRouter()
   const pathname = usePathname()

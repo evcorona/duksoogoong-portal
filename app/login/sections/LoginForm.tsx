@@ -1,7 +1,7 @@
 import FormContainer from '@/src/components/form/FormContainer'
 import RHFTextField from '@/src/components/form/RHFTextField'
 import TitleBar from '@/src/components/TitleBar'
-import { Box, Link, Typography } from '@mui/material'
+import { Box, Button, Link, Stack, Typography } from '@mui/material'
 import useLogin from '@/src/hooks/useLogin'
 
 export default function LoginForm() {
@@ -33,13 +33,27 @@ export default function LoginForm() {
           type="password"
         />
       </FormContainer>
-      <Typography
-        variant="body2"
-        marginTop={2}
-        textAlign={'center'}
+      <Stack
+        gap={2}
+        sx={{
+          paddingX: { xs: 2, sm: 4 },
+          paddingTop: 2,
+        }}
       >
-        ¿Eres nuevo? <Link href="registro">Crea una cuenta</Link>
-      </Typography>
+        <Typography
+          variant="body2"
+          textAlign="center"
+        >
+          ¿Eres nuevo por aquí? Regístrate ahora para empezar, ya seas profesor,
+          tutor o estudiante.
+        </Typography>
+        <Button
+          variant="outlined"
+          fullWidth
+        >
+          <Link href="registro">Crear cuenta</Link>
+        </Button>
+      </Stack>
     </Box>
   )
 }

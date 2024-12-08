@@ -4,7 +4,6 @@ import CustomTable from '@/src/components/CustomTable/CustomTable'
 import TitleBar from '@/src/components/TitleBar'
 import { TUTORS_HEADERS } from '@/schools/[schoolId]/tutors/constants/tutor.headers'
 import { deleteTutor, getTutorsBySchoolId } from '@/src/services/tutors'
-import { Add } from '@mui/icons-material'
 import Page from '@/src/components/Page'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
@@ -29,14 +28,7 @@ export default function Tutors() {
 
   return (
     <Page>
-      <TitleBar
-        title="Tutores"
-        buttonProps={{
-          label: 'crear tutor',
-          icon: <Add />,
-          onClick: () => push(`${pathname}/create`),
-        }}
-      />
+      <TitleBar title="Tutores" />
       <CustomTable
         name="tutors"
         headers={TUTORS_HEADERS}

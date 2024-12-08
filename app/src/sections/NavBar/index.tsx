@@ -84,17 +84,17 @@ export default function NavBar() {
               <Button
                 onClick={() => back()}
                 startIcon={<ArrowBackIos />}
-                size="small"
               >
                 Regresar
               </Button>
-              <Button
-                onClick={() => push('/')}
-                startIcon={<Home />}
-                size="small"
-              >
-                Inicio
-              </Button>
+              {pathname === '/login' && (
+                <Button
+                  onClick={() => push('/')}
+                  startIcon={<Home />}
+                >
+                  Inicio
+                </Button>
+              )}
             </Stack>
           </Box>
 

@@ -19,13 +19,13 @@ export default function Login() {
           width="100%"
           justifyContent="center"
           alignItems="center"
-          gap={4}
+          gap={2}
         >
           <Image
             src={'/logo.png'}
             alt={'Logo'}
-            width={130}
-            height={130}
+            width={120}
+            height={120}
           />
           <Stack
             direction="column"
