@@ -9,6 +9,7 @@ import Page from '@/src/components/Page'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
+import { ITeacher } from '@/src/types/Teacher'
 
 export default function Teachers() {
   const { push } = useRouter()
@@ -48,10 +49,7 @@ export default function Teachers() {
         }}
         sx={{ marginTop: 2, paddingBottom: 2 }}
         rowComponentProps={{
-          actions: {
-            href: (row: any) => `${pathname}/${row?._id}`,
-            openInNewTab: true,
-          },
+          actions: { href: (row: ITeacher) => `${pathname}/${row?._id}` },
           component: SeeDetailButton,
         }}
       />

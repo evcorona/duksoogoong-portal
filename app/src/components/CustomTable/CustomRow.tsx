@@ -160,21 +160,6 @@ export default function CustomRow(props: CustomRowProps) {
             </TableCell>
           )
         })}
-      {props.menuProps && (
-        <TableCell
-          align="center"
-          sx={{
-            borderBottom: '1px solid #EAEEF4',
-            width: '50px',
-          }}
-        >
-          <TableMenu
-            {...props.menuProps}
-            name={props.name}
-            data={props.data}
-          />
-        </TableCell>
-      )}
       {props.rowComponentProps && (
         <TableCell
           align="center"
@@ -188,6 +173,22 @@ export default function CustomRow(props: CustomRowProps) {
             data={props.data}
             {...props.rowComponentProps}
             {...props.rowComponentProps.actions}
+          />
+        </TableCell>
+      )}
+      {props.menuProps && (
+        <TableCell
+          align="center"
+          sx={{
+            borderBottom: '1px solid #EAEEF4',
+            padding: 0,
+            paddingX: '1',
+          }}
+        >
+          <TableMenu
+            {...props.menuProps}
+            name={props.name}
+            data={props.data}
           />
         </TableCell>
       )}

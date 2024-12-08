@@ -8,12 +8,10 @@ import { Add } from '@mui/icons-material'
 import Page from '@/src/components/Page'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useParams, usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
 import { ITutor } from '@/src/types/Tutor'
 
 export default function Tutors() {
-  const [selectedRow, setSelectedRow] = useState<ITutor | null>(null)
-
   const { push } = useRouter()
   const pathname = usePathname()
   const { schoolId } = useParams<{ schoolId: string }>()
@@ -28,10 +26,6 @@ export default function Tutors() {
     mutationFn: deleteTutor,
     onSuccess: () => refetch(),
   })
-
-  useEffect(() => {
-    selectedRow && push(`${pathname}/${selectedRow?._id}`)
-  }, [selectedRow])
 
   return (
     <Page>
@@ -53,10 +47,9 @@ export default function Tutors() {
           editAction: (data) => push(`${pathname}/${data?._id}/edit`),
           deleteAction: (data) => deleteMutation(data?._id),
         }}
-        selectRowProps={{
-          skipFirstSelection: true,
-          selectedRow,
-          setSelectedRow,
+        rowComponentProps={{
+          actions: { href: (row: ITutor) => `${pathname}/${row?._id}` },
+          component: SeeDetailButton,
         }}
         sx={{ marginTop: 2, paddingBottom: 2 }}
       />

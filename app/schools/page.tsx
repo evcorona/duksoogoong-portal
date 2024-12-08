@@ -7,13 +7,11 @@ import { deleteSchool, getSchools } from '@/src/services/schools'
 import { Add } from '@mui/icons-material'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { ISchool } from '@/src/types/School'
 import Page from '@/src/components/Page'
+import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
+import { ISchool } from '@/src/types/School'
 
 export default function Schools() {
-  const [selectedRow, setSelectedRow] = useState<ISchool | null>(null)
-
   const { push } = useRouter()
   const pathname = usePathname()
 
@@ -26,10 +24,6 @@ export default function Schools() {
     mutationFn: deleteSchool,
     onSuccess: () => refetch(),
   })
-
-  useEffect(() => {
-    selectedRow && push(`${pathname}/${selectedRow?._id}`)
-  }, [selectedRow])
 
   return (
     <Page>
@@ -52,10 +46,9 @@ export default function Schools() {
           deleteAction: (data) => deleteMutation(data?._id),
         }}
         sx={{ marginTop: 2, paddingBottom: 2 }}
-        selectRowProps={{
-          skipFirstSelection: true,
-          selectedRow,
-          setSelectedRow,
+        rowComponentProps={{
+          actions: { href: (row: ISchool) => `${pathname}/${row?._id}` },
+          component: SeeDetailButton,
         }}
       />
     </Page>

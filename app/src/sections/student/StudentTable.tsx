@@ -1,9 +1,8 @@
 import CustomTable from '@/src/components/CustomTable/CustomTable'
-
 import { IStudent } from '@/src/types/Student'
 import { STUDENTS_HEADERS } from '@/src/constants/student/students.headers'
 import { useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import SeeDetailButton from '@/src/components/CustomTable/SeeDetailButton'
 
 type Props = {
   data: IStudent[]
@@ -12,16 +11,7 @@ type Props = {
 }
 
 export default function StudentTable(props: Props) {
-  const [selectedRow, setSelectedRow] = useState<IStudent | null>(null)
-
   const { push } = useRouter()
-
-  useEffect(() => {
-    if (selectedRow) {
-      const schoolId = selectedRow?.schoolId
-      push(`/schools/${schoolId}/students/${selectedRow?._id}`)
-    }
-  }, [selectedRow])
 
   return (
     <CustomTable
@@ -36,10 +26,12 @@ export default function StudentTable(props: Props) {
         deleteAction: (data) => props.deleteAction(data?._id),
       }}
       sx={{ marginTop: 2, paddingBottom: 2 }}
-      selectRowProps={{
-        skipFirstSelection: true,
-        selectedRow,
-        setSelectedRow,
+      rowComponentProps={{
+        actions: {
+          href: (row: IStudent) =>
+            `/schools/${row?.schoolId}/students/${row?._id}`,
+        },
+        component: SeeDetailButton,
       }}
     />
   )

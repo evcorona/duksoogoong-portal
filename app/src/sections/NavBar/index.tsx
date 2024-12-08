@@ -16,8 +16,8 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { IPayload, clearUserState } from '@/src/store/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { Logout, Person } from '@mui/icons-material'
-import { Divider } from '@mui/material'
+import { ArrowBackIos, Home, Logout, Person } from '@mui/icons-material'
+import { Divider, Stack } from '@mui/material'
 
 interface ISetting {
   icon: any
@@ -30,7 +30,7 @@ export default function NavBar() {
 
   const authData = useSelector((state: { user: IPayload }) => state?.user)
 
-  const { push } = useRouter()
+  const { push, back } = useRouter()
   const dispatch = useDispatch()
 
   const settings: ISetting[] = [
@@ -62,12 +62,11 @@ export default function NavBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
-            onClick={() => push('/')}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'flex' },
               flexGrow: 1,
-              cursor: 'pointer',
+              gap: 2,
             }}
           >
             <Image
@@ -76,7 +75,29 @@ export default function NavBar() {
               width={50}
               height={50}
             />
+            <Stack
+              direction="row"
+              gap={2}
+              justifyContent={'space-between'}
+              flexGrow={1}
+            >
+              <Button
+                onClick={() => back()}
+                startIcon={<ArrowBackIos />}
+                size="small"
+              >
+                Regresar
+              </Button>
+              <Button
+                onClick={() => push('/')}
+                startIcon={<Home />}
+                size="small"
+              >
+                Inicio
+              </Button>
+            </Stack>
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             {isLogged && (
               <IconButton
