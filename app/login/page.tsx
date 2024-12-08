@@ -1,42 +1,49 @@
 'use client'
 
-import { Stack, Typography } from '@mui/material'
+import { Container, Grow, Stack, Typography } from '@mui/material'
 import Image from 'next/image'
 import LoginForm from './sections/LoginForm'
-import Page from '@/src/components/Page'
 
 export default function Login() {
   return (
-    <Page>
-      <Stack
-        direction="column"
-        width="100%"
-        justifyContent="center"
-        alignItems="center"
-        gap={4}
+    <Grow
+      in={true}
+      timeout={1000}
+    >
+      <Container
+        maxWidth={'xs'}
+        sx={{ paddingY: { xs: 2, sm: 4 } }}
       >
-        <Image
-          src={'/logo.png'}
-          alt={'Logo'}
-          width={130}
-          height={130}
-        />
         <Stack
           direction="column"
           width="100%"
           justifyContent="center"
           alignItems="center"
-          gap={2}
+          gap={4}
         >
-          <Typography
-            variant="h5"
-            textAlign={'center'}
+          <Image
+            src={'/logo.png'}
+            alt={'Logo'}
+            width={130}
+            height={130}
+          />
+          <Stack
+            direction="column"
+            width="100%"
+            justifyContent="center"
+            alignItems="center"
+            gap={2}
           >
-            Plataforma de DukSooGoong
-          </Typography>
-          <LoginForm />
+            <Typography
+              variant="h5"
+              textAlign={'center'}
+            >
+              Plataforma de DukSooGoong
+            </Typography>
+            <LoginForm />
+          </Stack>
         </Stack>
-      </Stack>
-    </Page>
+      </Container>
+    </Grow>
   )
 }

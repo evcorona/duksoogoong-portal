@@ -181,8 +181,7 @@ export default function CustomRow(props: CustomRowProps) {
           align="center"
           sx={{
             borderBottom: '1px solid #EAEEF4',
-            padding: 0,
-            paddingX: '1',
+            width: '50px',
           }}
         >
           <TableMenu
