@@ -15,7 +15,6 @@ export default function StudentTable(props: Props) {
 
   return (
     <CustomTable
-      size="small"
       name="students"
       headers={STUDENTS_HEADERS}
       data={props.data || []}

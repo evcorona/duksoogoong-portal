@@ -38,7 +38,6 @@ export default function Tutors() {
         }}
       />
       <CustomTable
-        size="small"
         name="tutors"
         headers={TUTORS_HEADERS}
         data={data || []}

@@ -36,7 +36,6 @@ export default function Schools() {
         }}
       />
       <CustomTable
-        size="small"
         name="schools"
         headers={SCHOOLS_HEADERS}
         data={data || []}
