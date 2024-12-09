@@ -14,6 +14,7 @@ export default function Header() {
         alt={'Logo'}
         width={110}
         height={110}
+        priority
       />
       <Stack
         gap={1}

@@ -10,7 +10,7 @@ const numberSchema = yup
 export default yup.object().shape({
   name: stringSchema,
   lastName: stringSchema,
-  email: stringSchema.email(),
+  email: stringSchema.email('Correo electrónico inválido'),
   phone: stringSchema,
   isAdmin: yup.boolean().default(false),
   grade: numberSchema.min(1).max(10),

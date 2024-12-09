@@ -45,12 +45,14 @@ export default function NavBar() {
   ]
 
   const pathname = usePathname()
+  const isLoginPage = pathname.includes('login')
+  const isRegisterPage = pathname.includes('registro')
 
   const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) =>
     setAnchorElUser(event.currentTarget)
   const handleCloseUserMenu = () => setAnchorElUser(null)
 
-  if (pathname === '/login') return <></>
+  if (isLoginPage) return <></>
 
   const isLogged = authData?.role
 
@@ -74,6 +76,7 @@ export default function NavBar() {
               alt={'Logo'}
               width={50}
               height={50}
+              priority
             />
             <Stack
               direction="row"
@@ -87,7 +90,7 @@ export default function NavBar() {
               >
                 Regresar
               </Button>
-              {pathname === '/login' && (
+              {!isRegisterPage && (
                 <Button
                   onClick={() => push('/')}
                   startIcon={<Home />}

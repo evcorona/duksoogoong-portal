@@ -41,6 +41,21 @@ export default yup.object().shape({
   }),
   schoolId: yup.string().trim().required('Campo requerido'),
   teacherId: yup.string().trim().required('Campo requerido'),
-  tutorId: yup.string().trim().optional(),
+  tutorId: yup
+    .string()
+    .trim()
+    .when('$isAdultStudent', {
+      is: false,
+      then: (schema) =>
+        schema.required('Estudiante menor de edad requiere tutor'),
+    }),
   userId: yup.string().trim().optional(),
+  email: yup
+    .string()
+    .trim()
+    .email('Correo electrónico inválido')
+    .when('$isAdultStudent', {
+      is: true,
+      then: (schema) => schema.required('Campo requerido'),
+    }),
 })

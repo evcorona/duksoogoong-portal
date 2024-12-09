@@ -30,7 +30,7 @@ export default function Schools() {
       <TitleBar
         title="Escuelas"
         buttonProps={{
-          label: 'crear escuela',
+          label: 'agregar escuela',
           icon: <Add />,
           onClick: () => push(`${pathname}/create`),
         }}

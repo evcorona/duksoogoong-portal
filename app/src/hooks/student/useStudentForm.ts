@@ -4,22 +4,35 @@ import dayjs from 'dayjs'
 import { useForm } from 'react-hook-form'
 import schema from '@/src/constants/student/student.schema'
 import { KUP_VALUES, DAN_VALUES } from '@/src/constants/business'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { IStudent } from '@/src/types/Student'
 import { isNumber } from 'lodash'
 import { getGradeLabel } from '@/src/utils/formatGrades'
 import formatPriorExperienceDays from '@/src/utils/formatPriorExperienceDays'
+import { useParams } from 'next/navigation'
 
 type Props = { studentToEdit?: IStudent }
 
 export default function useStudentForm(props: Props) {
+  const { tutorId } = useParams<{ tutorId: string }>()
+
+  const [isAdultStudent, setIsAdultStudent] = useState(false)
+
   const methods = useForm<any>({
     mode: 'onTouched',
     defaultValues: DEFAULT_STUDENT_VALUES,
     resolver: yupResolver(schema),
+    context: { isAdultStudent },
   })
 
-  const { watch, setValue, reset, resetField } = methods
+  const {
+    watch,
+    setValue,
+    reset,
+    resetField,
+    setError,
+    formState: { errors },
+  } = methods
 
   const birthDate = watch('birthDate')
   const age = dayjs().diff(birthDate, 'year')
@@ -28,6 +41,18 @@ export default function useStudentForm(props: Props) {
   const nextGrade = watch('nextGrade')
   const timePracticing = watch('timePracticing')
   const periodTime = watch('periodTime')
+
+  useEffect(() => {
+    tutorId && setValue('tutorId', tutorId)
+  }, [tutorId])
+
+  useEffect(() => {
+    if (errors?.tutorId)
+      setError('birthDate', {
+        type: 'manual',
+        message: errors?.tutorId?.message as string,
+      })
+  }, [errors?.tutorId])
 
   useEffect(() => {
     if (props.studentToEdit) {
@@ -45,6 +70,10 @@ export default function useStudentForm(props: Props) {
       })
     }
   }, [props.studentToEdit])
+
+  useEffect(() => {
+    age && setIsAdultStudent(age >= 18)
+  }, [age])
 
   useEffect(() => {
     if (currentGrade === null || !currentGradeLevel) return
@@ -96,5 +125,6 @@ export default function useStudentForm(props: Props) {
     ageLabel: birthDate && `${age} años`,
     displayNextGrade: isNumber(currentGrade),
     nextGradeLabel: getGradeLabel(nextGrade),
+    isAdultStudent: age >= 18,
   }
 }

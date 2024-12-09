@@ -26,6 +26,7 @@ export default function Login() {
             alt={'Logo'}
             width={120}
             height={120}
+            priority
           />
           <Stack
             direction="column"

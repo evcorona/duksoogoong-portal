@@ -7,7 +7,7 @@ import Page from '@/src/components/Page'
 export default function CreateSchool() {
   return (
     <Page>
-      <TitleBar title="Crear profesor" />
+      <TitleBar title="Agregar profesor" />
       <TeacherForm />
     </Page>
   )

@@ -16,6 +16,7 @@ export default function Home() {
     if (!role) push('/login')
     if (role === 'schoolAdmin') push(`/schools/${schoolId}`)
     if (role === 'teacher') push(`/schools/${schoolId}/teachers/${userId}`)
+    if (role === 'student') push(`/schools/${schoolId}/students/${userId}`)
     if (role === 'tutor') push(`/tutors/${userId}`)
     if (role === 'admin') push('/schools')
     if (role === 'main') push('/schools')

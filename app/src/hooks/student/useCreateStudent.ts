@@ -11,7 +11,11 @@ export default function useCreateStudent() {
   const { push, back } = useRouter()
   const pathname = usePathname()
 
-  const { mutate: createStudentMutation, isPending: isCreating } = useMutation({
+  const {
+    mutate: createStudentMutation,
+    isPending: isCreating,
+    isSuccess: isCreated,
+  } = useMutation({
     mutationFn: createStudents,
     onSuccess: () => {
       toast.success(MESSAGES.create.success.student, {
@@ -28,5 +32,5 @@ export default function useCreateStudent() {
   const createStudentSubmit = (formValues: IStudent) =>
     createStudentMutation({ ...formValues, tutorId })
 
-  return { createStudentSubmit, isCreating }
+  return { createStudentSubmit, isCreating, isCreated }
 }

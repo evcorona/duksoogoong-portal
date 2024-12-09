@@ -58,7 +58,7 @@ export default function TutorForm() {
       reset({ ...data, email: data?.userId?.email, userId: data?.userId?._id })
   }, [data])
 
-  const buttonLabel = data ? 'Actualizar' : 'Crear'
+  const buttonLabel = data ? 'Guardar cambios' : 'Agregar tutor'
 
   const submitAction = data
     ? (formData: ITutor) =>

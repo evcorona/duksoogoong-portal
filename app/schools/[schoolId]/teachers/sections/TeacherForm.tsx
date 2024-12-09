@@ -81,7 +81,7 @@ export default function TeacherForm() {
       reset({ ...data, email: data?.userId?.email, userId: data?.userId?._id })
   }, [data])
 
-  const buttonLabel = data ? 'Actualizar' : 'Crear'
+  const buttonLabel = data ? 'Guardar cambios' : 'Agregar profesor'
 
   const submitAction = data
     ? (formData: ITeacher) =>

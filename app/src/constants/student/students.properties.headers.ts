@@ -137,7 +137,7 @@ export const STUDENTS_PROPERTIES_HEADERS: StudentsPropertiesHeaders = {
     label: 'Tutor',
     align: 'left',
     customRow: (value) => ({
-      value: `${value?.name} ${value?.lastName}`,
+      value: value ? `${value?.name} ${value?.lastName}` : 'N/A',
       styles: { textTransform: 'capitalize', whiteSpace: 'nowrap' },
     }),
   },

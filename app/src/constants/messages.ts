@@ -10,12 +10,13 @@ const MESSAGES: IMessages = {
     },
     error: {
       student:
-        'Error al crear el estudiante. Inténtalo de nuevo o contacta soporte.',
+        'Error al agregar el estudiante. Inténtalo de nuevo o contacta soporte.',
       school:
-        'Error al crear la escuela. Inténtalo de nuevo o contacta soporte.',
+        'Error al agregar la escuela. Inténtalo de nuevo o contacta soporte.',
       teacher:
-        'Error al crear el profesor. Inténtalo de nuevo o contacta soporte.',
-      tutor: 'Error al crear el tutor. Inténtalo de nuevo o contacta soporte.',
+        'Error al agregar el profesor. Inténtalo de nuevo o contacta soporte.',
+      tutor:
+        'Error al agregar el tutor. Inténtalo de nuevo o contacta soporte.',
     },
   },
   edit: {

@@ -49,7 +49,7 @@ export default function SchoolForm() {
     data && reset(data)
   }, [data])
 
-  const buttonLabel = data ? 'Actualizar' : 'Crear'
+  const buttonLabel = data ? 'Guardar cambios' : 'Agregar escuela'
 
   const submitAction = data
     ? (formData: ISchool) => editSchoolSubmit({ ...formData, _id: schoolId })

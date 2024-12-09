@@ -22,13 +22,19 @@ export default function StudentForm() {
   const { student: studentToEdit, isLoading: isLoadingData } =
     useStudentQueries({ enableQueryOne: true })
 
-  const { methods, gradesOptions, ageLabel, displayNextGrade, nextGradeLabel } =
-    useStudentForm({ studentToEdit })
+  const {
+    methods,
+    gradesOptions,
+    ageLabel,
+    displayNextGrade,
+    nextGradeLabel,
+    isAdultStudent,
+  } = useStudentForm({ studentToEdit })
 
   const {
     watch,
     setValue,
-    formState: { isValidating, isSubmitSuccessful },
+    formState: { isValidating },
   } = methods
 
   const schoolSelected = watch('schoolId')
@@ -41,18 +47,20 @@ export default function StudentForm() {
     externalSchoolId: schoolSelected,
   })
 
-  const { createStudentSubmit, isCreating } = useCreateStudent()
-  const { editStudentSubmit, isEditing } = useEditStudent()
+  const { createStudentSubmit, isCreating, isCreated } = useCreateStudent()
+  const { editStudentSubmit, isEditing, isEdited } = useEditStudent()
 
   const submitAction = studentToEdit ? editStudentSubmit : createStudentSubmit
-  const buttonLabel = studentToEdit ? 'Guardar cambios' : 'Crear estudiante'
+  const buttonLabel = studentToEdit ? 'Guardar cambios' : 'Agregar estudiante'
+  const enableEmail = isAdultStudent && !studentToEdit?.userId
 
   const disableForms = [
     isValidating,
     isLoadingData,
     isCreating,
     isEditing,
-    isSubmitSuccessful,
+    isCreated,
+    isEdited,
   ].some(Boolean)
 
   const isLoading = [isValidating, isCreating, isEditing].some(Boolean)
@@ -74,6 +82,7 @@ export default function StudentForm() {
           <Button
             variant="outlined"
             onClick={back}
+            sx={{ width: { xs: '100%', sm: 'auto' } }}
           >
             Cancelar
           </Button>
@@ -95,7 +104,6 @@ export default function StudentForm() {
           type="text"
           disabled={disableForms}
         />
-
         <RHFAutocomplete
           name="civilStatus"
           label="Estado civil"
@@ -139,6 +147,13 @@ export default function StudentForm() {
             </Typography>
           )}
         </CustomGridContainer>
+        {enableEmail && (
+          <RHFTextField
+            name="email"
+            label="Email de acceso"
+            disabled={disableForms}
+          />
+        )}
         <TitleBar
           title="Tiempo de practica previa"
           isSectionTitle

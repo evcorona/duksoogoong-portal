@@ -9,7 +9,11 @@ export default function useEditStudent() {
   const { push, back } = useRouter()
   const pathname = usePathname()
 
-  const { mutate: editStudentMutation, isPending: isEditing } = useMutation({
+  const {
+    mutate: editStudentMutation,
+    isPending: isEditing,
+    isSuccess: isEdited,
+  } = useMutation({
     mutationFn: editStudent,
     onSuccess: () => {
       toast.success(MESSAGES.edit.success.student, {
@@ -26,5 +30,5 @@ export default function useEditStudent() {
   const editStudentSubmit = (formValues: IStudent) =>
     editStudentMutation({ ...formValues })
 
-  return { editStudentSubmit, isEditing }
+  return { editStudentSubmit, isEditing, isEdited }
 }

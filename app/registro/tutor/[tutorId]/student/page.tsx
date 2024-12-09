@@ -1,14 +1,7 @@
 'use client'
 
-import Page from '@/src/components/Page'
-import TitleBar from '@/src/components/TitleBar'
-import StudentForm from '@/src/sections/student/StudentForm'
+import StudentJoin from '@/registro/student/page'
 
-export default function StudentJoin() {
-  return (
-    <Page>
-      <TitleBar title="Registro de Estudiantes" />
-      <StudentForm />
-    </Page>
-  )
+export default function TutorStudentJoin() {
+  return <StudentJoin />
 }

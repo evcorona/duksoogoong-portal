@@ -5,7 +5,7 @@ const stringSchema = yup.string().trim().required('Campo requerido')
 export default yup.object().shape({
   name: stringSchema.lowercase(),
   lastName: stringSchema.lowercase(),
-  email: stringSchema.email(),
+  email: stringSchema.email('Correo electrónico inválido'),
   phone: stringSchema,
   address: yup.object().shape({
     address: stringSchema.lowercase(),

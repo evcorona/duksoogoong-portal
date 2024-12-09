@@ -32,7 +32,7 @@ export default function Teachers() {
       <TitleBar
         title="Profesores"
         buttonProps={{
-          label: 'crear profesor',
+          label: 'agregar profesor',
           icon: <Add />,
           onClick: () => push(`${pathname}/create`),
         }}
